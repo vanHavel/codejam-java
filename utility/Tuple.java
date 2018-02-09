@@ -3,6 +3,8 @@ package utility;
 /**
  * Created by lukashuwald on 09.02.18.
  */
+
+// generic tuple data class
 public class Tuple<A,B> {
 
     public A fst;

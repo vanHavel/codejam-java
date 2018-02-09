@@ -3,12 +3,15 @@ package utility;
 /**
  * Created by lukashuwald on 08.02.18.
  */
+
+// this class implements a union find structure of disjoint sets
 public class UnionFind {
 
     private int classes;
     private int[] parents;
     private int[] ranks;
 
+    // create new structure with classes many singleton sets
     public UnionFind(int classes) {
         this.classes = classes;
         this.parents = new int[classes];
@@ -18,11 +21,14 @@ public class UnionFind {
         this.ranks = new int[classes];
     }
 
+    // get number of disjoint sets
     public int getClasses() {
         return this.classes;
     }
 
+    // find root of a set element
     public int find(int i) {
+        // iterative to avoid stack overflows
         int cur = i;
         while (cur != this.parents[cur]) {
             cur = this.parents[cur];
@@ -40,6 +46,7 @@ public class UnionFind {
         return root;
     }
 
+    // unite two disjoint sets
     public void union(int i, int j) {
         int ri = this.find(i);
         int rj = this.find(j);
