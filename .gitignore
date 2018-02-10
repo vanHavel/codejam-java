@@ -1,0 +1,9 @@
+.DS_Store
+.idea/
+*.template
+CHelperReport.txt
+chelper.properties
+*.iml
+out
+output
+src/problems
