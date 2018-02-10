@@ -1,4 +1,4 @@
-package utility;
+package structure;
 
 import java.util.function.LongBinaryOperator;
 

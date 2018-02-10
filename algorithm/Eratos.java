@@ -1,4 +1,4 @@
-package utility;
+package algorithm;
 
 import java.util.Vector;
 

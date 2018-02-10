@@ -1,4 +1,6 @@
-package utility;
+package data;
+
+import java.util.Objects;
 
 // this data class represents a point in 3D space
 public class Point3D {
@@ -20,5 +22,20 @@ public class Point3D {
     // euclidian distance
     static double distance(Point3D p1, Point3D p2) {
         return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2) + Math.pow(p1.z - p2.z, 2));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point3D point3D = (Point3D) o;
+        return Double.compare(point3D.x, x) == 0 &&
+                Double.compare(point3D.y, y) == 0 &&
+                Double.compare(point3D.z, z) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, z);
     }
 }

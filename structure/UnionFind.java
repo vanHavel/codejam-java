@@ -1,4 +1,4 @@
-package utility;
+package structure;
 
 /**
  * Created by lukashuwald on 08.02.18.
