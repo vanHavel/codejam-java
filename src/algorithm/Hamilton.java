@@ -24,7 +24,7 @@ public class Hamilton {
     }
 
     // recurive solution with caching
-    public int compute(int[][] dp, int start, int visits) {
+    private int compute(int[][] dp, int start, int visits) {
         if (dp[start][visits] != -1) {
             return dp[start][visits];
         }
