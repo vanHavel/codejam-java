@@ -31,8 +31,8 @@ public class BipartiteMatching {
         }
         // internal edges
         for (int i = 1; i < n; ++i) {
-            for (int j = n + 1; n < size - 1; ++j) {
-                capacities[i][j] = this.edges[i - 1][j - n - i] ? 1 : 0;
+            for (int j = n + 1; j < size - 1; ++j) {
+                capacities[i][j] = this.edges[i - 1][j - n - 1] ? 1 : 0;
             }
         }
         // compute maxFlow using Ford Fulkerson
@@ -41,7 +41,7 @@ public class BipartiteMatching {
         // recover matching
         Set<Edge> matching = new HashSet<>();
         for (int i = 1; i < n; ++i) {
-            for (int j = n + 1; n < size - 1; ++j) {
+            for (int j = n + 1; j < size - 1; ++j) {
                 if (maxFlow.snd[i][j] == 1) {
                     matching.add(new Edge(i - 1, j - n - 1));
                 }
