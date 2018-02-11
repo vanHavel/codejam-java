@@ -10,18 +10,16 @@ import java.util.Vector;
 public class Eratos {
 
     private boolean[] isPrime;
-
     private Vector<Integer> primes;
 
-    // perform sieve to find all primes up to (and including) bound
+    // initialize eratos with upper bound
     public Eratos(int bound) {
         this.primes = new Vector<>();
         this.isPrime = new boolean[bound+1];
-        this.sieve();
     }
 
-    // the sieve function
-    private void sieve() {
+    // perform sieve to find all primes up to (and including) bound
+    public void sieve() {
         int bound = this.isPrime.length;
         if ((bound - 1) < 2) {
             return;
