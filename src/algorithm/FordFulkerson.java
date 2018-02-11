@@ -2,6 +2,7 @@ package algorithm;
 
 import data.Tuple;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Stack;
@@ -19,70 +20,67 @@ public class FordFulkerson {
         this.flow = new int[n][n];
     }
 
-   public Tuple<Integer, int[][]> maxFlow() {
-        LinkedList<Integer> path = dfs();
-        if (path == null) {
-            int increase = this.getIncrease(path);
-            this.increasePath(path, increase);
+    // calculate maxFlow value and capacities
+    public Tuple<Integer, int[][]> maxFlow() {
+        int[] parents = dfs();
+        int sink = this.capacities.length - 1;
+        while (parents[sink] != -1) {
+            int increase = this.getIncrease(parents);
+            this.increasePath(parents, increase);
+            parents = dfs();
         }
         int maxFlow = 0;
         for (int i = 0; i < capacities.length; ++i) {
             maxFlow += flow[0][i];
         }
         return new Tuple(maxFlow, flow);
-   }
+    }
 
-    private LinkedList<Integer> dfs() {
+    // perform dfs from source to sink in residual network, return parents for each discovered node
+    private int[] dfs() {
         int source = 0;
         int sink = this.capacities.length - 1;
         Stack<Integer> stack = new Stack<>();
-        LinkedList<Integer> path = new LinkedList<>();
+        int[] parents = new int[this.capacities.length];
+        Arrays.fill(parents, -1);
+        parents[source] = 0;
         stack.push(source);
-        path.push(source);
-        while (! stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             int top = stack.pop();
-            path.push(top);
             if (this.capacities[top][sink] - this.flow[top][sink] > 0) {
-                path.push(sink);
-                return path;
-            }
-            else {
-                boolean found = false;
+                parents[sink] = top;
+                return parents;
+            } else {
                 for (int i = 0; i < sink; ++i) {
-                    if (this.capacities[top][i] - this.flow[top][i] > 0) {
+                    if (this.capacities[top][i] - this.flow[top][i] > 0 && parents[i] == -1) {
                         stack.push(i);
-                        found = true;
+                        parents[i] = top;
                     }
                 }
-                if (!found) {
-                    path.pop();
-                }
             }
         }
-        return null;
+        return parents;
     }
 
-    private void increasePath(LinkedList<Integer> path, int increase) {
-        int current = path.peekFirst();
-        Iterator<Integer> it = path.iterator();
-        it.next();
-        while (it.hasNext()) {
-            int next = it.next();
-            this.flow[current][next] += increase;
-            this.flow[next][current] -= increase;
+    private void increasePath(int[] parents, int increase) {
+        int sink = this.capacities.length - 1;
+        int current = sink;
+        while (parents[current] != current) {
+            int previous = parents[current];
+            this.flow[previous][current] += increase;
+            this.flow[current][previous] -= increase;
+            current = previous;
         }
     }
 
-    private int getIncrease(LinkedList<Integer> path) {
-        int current = path.peekFirst();
+    private int getIncrease(int[] parents) {
         int increase = Integer.MAX_VALUE;
-        Iterator<Integer> it = path.iterator();
-        it.next();
-        while (it.hasNext()) {
-            int next = it.next();
-            int residual = this.capacities[current][next] - this.flow[current][next];
-            increase = Math.min(increase, residual);
-            current = next;
+        int sink = this.capacities.length - 1;
+        int current = sink;
+        while (parents[current] != current) {
+            int previous = parents[current];
+            increase = Math.min(increase, this.capacities[previous][current] - this.flow[previous][current]);
+            current = previous;
         }
         return increase;
     }
