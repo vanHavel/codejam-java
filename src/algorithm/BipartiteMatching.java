@@ -30,7 +30,7 @@ public class BipartiteMatching {
             capacities[i][size - 1] = 1;
         }
         // internal edges
-        for (int i = 1; i < n; ++i) {
+        for (int i = 1; i <= n; ++i) {
             for (int j = n + 1; j < size - 1; ++j) {
                 capacities[i][j] = this.edges[i - 1][j - n - 1] ? 1 : 0;
             }
