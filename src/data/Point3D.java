@@ -2,7 +2,7 @@ package data;
 
 import java.util.Objects;
 
-// this data class represents a point in 3D space
+// this data class represents a point with real coordinates in 3D space
 public class Point3D {
     public double x;
     public double y;

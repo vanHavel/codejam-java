@@ -106,6 +106,15 @@ public class MyInputReader {
         return res;
     }
 
+    public char[][] nextCharMatrix(int n, int m) {
+        String[] lines = this.nextLineArray(n);
+        char[][] res = new char[n][m];
+        for (int i = 0; i < n; ++i) {
+            res[i] = lines[i].toCharArray();
+        }
+        return res;
+    }
+
 
 
 }
