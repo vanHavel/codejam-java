@@ -10,10 +10,9 @@ import java.util.function.ToIntFunction;
 // this class implements the A* pathfinding/search algorithm
 public class AStar<S> {
 
-    private S initalState;
     private Function<S, Collection<Tuple<S, Integer>>> successors;
     private Predicate<S> goalTest;
-    private ToIntFunction<S> heuristic
+    private ToIntFunction<S> heuristic;
     private PriorityQueue<Node<S>> openList;
     private HashSet<S> closedList;
 
@@ -49,15 +48,24 @@ public class AStar<S> {
         public int compareTo(Node<S> o) {
             return Integer.compare(this.cost + this.h, o.cost + o.h);
         }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "state=" + state +
+                    ", cost=" + cost +
+                    ", h=" + h +
+                    '}';
+        }
     }
 
     // initialize class with initial state, successor function, goal predicate and heuristic
     public AStar(S initialState, Function<S, Collection<Tuple<S, Integer>>> successors, Predicate<S> goalTest, ToIntFunction<S> heuristic) {
-        this.initalState = initialState;
         this.successors = successors;
         this.goalTest = goalTest;
         this.heuristic = heuristic;
         this.openList = new PriorityQueue<>();
+        this.openList.add(new Node<S>(initialState, 0, heuristic.applyAsInt(initialState)));
         this.closedList = new HashSet<>();
     }
 
@@ -81,7 +89,7 @@ public class AStar<S> {
                 Collection<Tuple<S, Integer>> succs = this.successors.apply(head.state);
                 for (Tuple<S, Integer> t : succs) {
                     if (!this.closedList.contains(t.fst)) {
-                        Node<S> newNode = new Node<>(t.fst, t.snd, this.heuristic.applyAsInt(t.fst));
+                        Node<S> newNode = new Node<>(t.fst, head.cost + t.snd, this.heuristic.applyAsInt(t.fst));
                         this.openList.add(newNode);
                     }
                 }
