@@ -33,7 +33,7 @@ public class FordFulkerson {
         for (int i = 0; i < capacities.length; ++i) {
             maxFlow += flow[0][i];
         }
-        return new Tuple(maxFlow, flow);
+        return new Tuple<>(maxFlow, flow);
     }
 
     // perform dfs from source to sink in residual network, return parents for each discovered node
