@@ -115,6 +115,15 @@ public class MyInputReader {
         return res;
     }
 
-
+    public int[][] nextDigitMatrix(int n, int m) {
+        String[] lines = this.nextLineArray(n);
+        int[][] res = new int[n][m];
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                res[i][j] = lines[i].charAt(j);
+            }
+        }
+        return res;
+    }
 
 }
