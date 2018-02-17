@@ -1,5 +1,6 @@
 package algorithm;
 
+import java.util.BitSet;
 import java.util.Vector;
 
 /**
@@ -9,8 +10,6 @@ import java.util.Vector;
 // this class implements the prime number sieve of Eratosthenes
 // use this for bounds n up to 10^8
 public class Eratos {
-
-    private boolean[] isPrime;
     private Vector<Integer> primes;
     private int bound;
 
@@ -18,29 +17,31 @@ public class Eratos {
     public Eratos(int bound) {
         this.primes = new Vector<>(1000000);
         this.bound = bound;
-        int odds = (bound / 2) + (bound % 2);
-        // is Prime stores primality for all odd numbers up to bound
-        this.isPrime = new boolean[odds];
     }
 
     // perform sieve to find all primes up to (and including) bound
     public void sieve() {
-        if ((this.bound - 1) < 2) {
+        if (this.bound < 2) {
             return;
         }
-        for (int i = 1; i < this.isPrime.length; ++i) {
-            this.isPrime[i] = true;
+        int odds = (bound / 2) + (bound % 2);
+        // isPrime stores primality for all odd numbers up to bound
+        BitSet isPrime = new BitSet(odds);
+
+        // inialize isPrime
+        for (int i = 1; i < isPrime.size(); ++i) {
+            isPrime.set(i);
         }
         this.primes.add(2);
 
         // only consider odd numbers > 2
         for (int i = 3; i <= bound; i += 2) {
-            if (!this.isPrime[i / 2]) {
+            if (!isPrime.get(i/2)) {
                 continue;
             }
             primes.add(i);
             for (int j = 3*i; j <= bound; j += 2*i) {
-                isPrime[j / 2] = false;
+                isPrime.clear(j/2);
             }
         }
     }
