@@ -24,6 +24,9 @@ public class FloydWarshall {
                 for (int j = 0; j < n; ++j) {
                     int val1 = dp[i][j];
                     int val2 = dp[i][k] + dp[k][j];
+                    if (dp[i][k] == -1 || dp[k][j] == -1) {
+                        val2 = -1;
+                    }
                     int res;
                     if (val1 == -1) {
                         res = val2;

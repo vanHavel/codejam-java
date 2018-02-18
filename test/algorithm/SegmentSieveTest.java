@@ -20,10 +20,4 @@ class SegmentSieveTest {
         assertEquals(664579, primes);
     }
 
-    @Test
-    public void performanceTest() {
-        SegmentSieve segmentSieve = new SegmentSieve(100000000);
-        long primes = segmentSieve.sieve();
-        System.out.println(primes);
-    }
 }
