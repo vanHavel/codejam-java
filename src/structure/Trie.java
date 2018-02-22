@@ -98,17 +98,4 @@ public class Trie<A> {
         return Objects.hash(successors);
     }
 
-    public static List<Character> stringAsList(String s) {
-        return new AbstractList<Character>() {
-            @Override
-            public Character get(int index) {
-                return s.charAt(index);
-            }
-
-            @Override
-            public int size() {
-                return s.length();
-            }
-        };
-    }
 }

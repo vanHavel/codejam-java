@@ -1,5 +1,6 @@
 package structure;
 
+import Utility.MyUtility;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,40 +11,40 @@ class TrieTest {
     public void testTrie() {
         Trie<Character> trie = new Trie<>();
         // insertion
-        trie.insert(Trie.stringAsList("abc"));
-        trie.insert(Trie.stringAsList("abd"));
-        trie.insert(Trie.stringAsList("aaef"));
-        trie.insert(Trie.stringAsList("aae"));
-        trie.insert(Trie.stringAsList("zuf"));
+        trie.insert(MyUtility.stringAsList("abc"));
+        trie.insert(MyUtility.stringAsList("abd"));
+        trie.insert(MyUtility.stringAsList("aaef"));
+        trie.insert(MyUtility.stringAsList("aae"));
+        trie.insert(MyUtility.stringAsList("zuf"));
 
         // test search
-        assertEquals(true, trie.search(Trie.stringAsList("abc")));
-        assertEquals(true, trie.search(Trie.stringAsList("aaef")));
-        assertEquals(true, trie.search(Trie.stringAsList("zuf")));
-        assertEquals(false, trie.search(Trie.stringAsList("ab")));
-        assertEquals(false, trie.search(Trie.stringAsList("aae")));
-        assertEquals(false, trie.search(Trie.stringAsList("abe")));
+        assertEquals(true, trie.search(MyUtility.stringAsList("abc")));
+        assertEquals(true, trie.search(MyUtility.stringAsList("aaef")));
+        assertEquals(true, trie.search(MyUtility.stringAsList("zuf")));
+        assertEquals(false, trie.search(MyUtility.stringAsList("ab")));
+        assertEquals(false, trie.search(MyUtility.stringAsList("aae")));
+        assertEquals(false, trie.search(MyUtility.stringAsList("abe")));
 
         // test containsPrefix
-        assertEquals(true, trie.containsPrefix(Trie.stringAsList("")));
-        assertEquals(true, trie.containsPrefix(Trie.stringAsList("a")));
-        assertEquals(true, trie.containsPrefix(Trie.stringAsList("ab")));
-        assertEquals(true, trie.containsPrefix(Trie.stringAsList("abd")));
-        assertEquals(true, trie.containsPrefix(Trie.stringAsList("aae")));
-        assertEquals(false, trie.search(Trie.stringAsList("abcd")));
-        assertEquals(false, trie.search(Trie.stringAsList("d")));
+        assertEquals(true, trie.containsPrefix(MyUtility.stringAsList("")));
+        assertEquals(true, trie.containsPrefix(MyUtility.stringAsList("a")));
+        assertEquals(true, trie.containsPrefix(MyUtility.stringAsList("ab")));
+        assertEquals(true, trie.containsPrefix(MyUtility.stringAsList("abd")));
+        assertEquals(true, trie.containsPrefix(MyUtility.stringAsList("aae")));
+        assertEquals(false, trie.search(MyUtility.stringAsList("abcd")));
+        assertEquals(false, trie.search(MyUtility.stringAsList("d")));
 
         // test longestPrefix
-        assertEquals(Trie.stringAsList("abc"),
-                     trie.longestPrefix(Trie.stringAsList("abcd")));
-        assertEquals(Trie.stringAsList("aa"),
-                trie.longestPrefix(Trie.stringAsList("aafg")));
-        assertEquals(Trie.stringAsList("a"),
-                trie.longestPrefix(Trie.stringAsList("adc")));
-        assertEquals(Trie.stringAsList("zuf"),
-                trie.longestPrefix(Trie.stringAsList("zuffenhausen")));
-        assertEquals(Trie.stringAsList(""),
-                trie.longestPrefix(Trie.stringAsList("hzu")));
+        assertEquals(MyUtility.stringAsList("abc"),
+                     trie.longestPrefix(MyUtility.stringAsList("abcd")));
+        assertEquals(MyUtility.stringAsList("aa"),
+                trie.longestPrefix(MyUtility.stringAsList("aafg")));
+        assertEquals(MyUtility.stringAsList("a"),
+                trie.longestPrefix(MyUtility.stringAsList("adc")));
+        assertEquals(MyUtility.stringAsList("zuf"),
+                trie.longestPrefix(MyUtility.stringAsList("zuffenhausen")));
+        assertEquals(MyUtility.stringAsList(""),
+                trie.longestPrefix(MyUtility.stringAsList("hzu")));
 
     }
 
