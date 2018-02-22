@@ -38,19 +38,19 @@ public class Trie<A> {
         }
     }
 
-    // search for a given sequence in the trie
-    public boolean search(List<A> input) {
+    // search for the subtrie corresponding to given prefix
+    private Trie<A> searchSubTrie(List<A> input) {
         List<A> list = new LinkedList<>(input);
         if (list.isEmpty()) {
-            return true;
+            return this;
         }
         A head = list.get(0);
         list.remove(0);
         if (this.successors.containsKey(head)) {
-            return this.successors.get(head).search(list);
+            return this.successors.get(head).searchSubTrie(list);
         }
         else {
-            return false;
+            return null;
         }
     }
 
@@ -74,6 +74,17 @@ public class Trie<A> {
         }
     }
 
+    // check whether the trie contains a list with given prefix
+    public boolean containsPrefix(List<A> input) {
+        return this.searchSubTrie(input) != null;
+    }
+
+    // search whether trie contains a leaf corresponding to input sequence
+    public boolean search(List<A> input) {
+        Trie<A> subTrie = this.searchSubTrie(input);
+        return subTrie != null && subTrie.isLeaf();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,5 +96,19 @@ public class Trie<A> {
     @Override
     public int hashCode() {
         return Objects.hash(successors);
+    }
+
+    public static List<Character> stringAsList(String s) {
+        return new AbstractList<Character>() {
+            @Override
+            public Character get(int index) {
+                return s.charAt(index);
+            }
+
+            @Override
+            public int size() {
+                return s.length();
+            }
+        };
     }
 }
