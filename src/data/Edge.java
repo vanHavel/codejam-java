@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Edge {
 
-    public int origin;
-    public int target;
+    public final int origin;
+    public final int target;
 
 
     public Edge(int origin, int target) {

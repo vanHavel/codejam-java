@@ -4,9 +4,9 @@ import java.util.Objects;
 
 // this data class represents a point with real coordinates in 3D space
 public class Point3D {
-    public double x;
-    public double y;
-    public double z;
+    public final double x;
+    public final double y;
+    public final double z;
 
     public Point3D(double x, double y, double z) {
         this.x = x;

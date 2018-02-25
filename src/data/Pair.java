@@ -2,28 +2,25 @@ package data;
 
 import java.util.Objects;
 
-/**
- * Created by lukashuwald on 09.02.18.
- */
-
-// generic tuple data class
-public class Tuple<A,B> {
+// generic pair class
+public class Pair<A> {
 
     public final A fst;
-    public final B snd;
+    public final A snd;
 
-    public Tuple(A a, B b) {
-        this.fst = a;
-        this.snd = b;
+
+    public Pair(A fst, A snd) {
+        this.fst = fst;
+        this.snd = snd;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Tuple<?, ?> tuple = (Tuple<?, ?>) o;
-        return Objects.equals(fst, tuple.fst) &&
-                Objects.equals(snd, tuple.snd);
+        Pair<?> pair = (Pair<?>) o;
+        return Objects.equals(fst, pair.fst) &&
+                Objects.equals(snd, pair.snd);
     }
 
     @Override
@@ -33,7 +30,7 @@ public class Tuple<A,B> {
 
     @Override
     public String toString() {
-        return "Tuple{" +
+        return "Pair{" +
                 "fst=" + fst +
                 ", snd=" + snd +
                 '}';

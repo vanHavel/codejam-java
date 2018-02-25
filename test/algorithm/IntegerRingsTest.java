@@ -1,5 +1,6 @@
 package algorithm;
 
+import data.Pair;
 import data.Tuple;
 import org.junit.jupiter.api.Test;
 
@@ -9,12 +10,12 @@ class IntegerRingsTest {
 
     @Test
     public void testEEA() {
-        Tuple<Long, Tuple<Long, Long>> res1 = IntegerRings.extendedEuclidean(5, 10);
+        Tuple<Long, Pair<Long>> res1 = IntegerRings.extendedEuclidean(5, 10);
         assertEquals(5, (long) res1.fst);
         assertEquals(1, (long) res1.snd.fst % 10);
         assertEquals(0, (long) res1.snd.snd % 10);
 
-        Tuple<Long, Tuple<Long, Long>> res2 = IntegerRings.extendedEuclidean(13, 38);
+        Tuple<Long, Pair<Long>> res2 = IntegerRings.extendedEuclidean(13, 38);
         assertEquals(1, (long) res2.fst);
         assertEquals(3, (long) res2.snd.fst);
         assertEquals(-1, (long) res2.snd.snd);

@@ -5,8 +5,8 @@ import java.util.Objects;
 // this class represents a 2D integer position in Space
 public class Position {
 
-    public int x;
-    public int y;
+    public final int x;
+    public final int y;
 
 
     public Position(int x, int y) {

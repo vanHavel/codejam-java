@@ -1,5 +1,6 @@
 package algorithm;
 
+import data.Pair;
 import data.Tuple;
 
 // this class implements the extended euclidean algorithm in integer rings,
@@ -8,7 +9,7 @@ public class IntegerRings {
 
     // compute modular inverse, or return -1 if it does not exist
     public static long modularInverse(long i, long modulus) {
-        Tuple<Long, Tuple<Long, Long>> eer = extendedEuclidean(i, modulus);
+        Tuple<Long, Pair<Long>> eer = extendedEuclidean(i, modulus);
         if (eer.fst != 1) {
             return -1;
         }
@@ -34,11 +35,11 @@ public class IntegerRings {
     // given two positive integers i, j:
     // compute gcd(i,j) and a,b such that a * j + b * i = gcd(i,j)
     // a and b are not unique and might be negative
-    public static Tuple<Long, Tuple<Long, Long>> extendedEuclidean(long i, long j) {
+    public static Tuple<Long, Pair<Long>> extendedEuclidean(long i, long j) {
         // if j is smaller swap the inputs
         if (j < i) {
-            Tuple<Long, Tuple<Long, Long>> swapped = extendedEuclidean(j, i);
-            return new Tuple<>(swapped.fst, new Tuple<>(swapped.snd.snd, swapped.snd.fst));
+            Tuple<Long, Pair<Long>> swapped = extendedEuclidean(j, i);
+            return new Tuple<>(swapped.fst, new Pair<>(swapped.snd.snd, swapped.snd.fst));
         }
         // invariant: a * j + b * i = rest
         // initially: 1 * j + 0 * i = j and 0 * j + 1 * i = i
@@ -61,7 +62,7 @@ public class IntegerRings {
             b = oldB - div * b;
             oldB = tmp;
         }
-        return new Tuple<>(oldRest, new Tuple<>(oldB, oldA));
+        return new Tuple<>(oldRest, new Pair<>(oldB, oldA));
     }
 
     // square and multiply with modulus
