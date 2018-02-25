@@ -8,6 +8,8 @@ Utility classes for Google Code Jam
 
 `src/data` contains simple utility data classes, e.g. a generic tuple class.
 
-`src/IO` contains an InputReader and OutputWriter class that are compatible with Egor Kulikov's chelper plugin. However, they can also be used as standalone helper classes for google code jam. 
+`src/utility` contains some simple utility methods that did not fit anywhere else.
+
+`src/IO` contains an InputReader and OutputWriter class that are compatible with Egor Kulikov's [chelper](https://plugins.jetbrains.com/plugin/7091-chelper) plugin. However, they can also be used as standalone helper classes for google code jam. 
 
 `test` contains unit tests.
