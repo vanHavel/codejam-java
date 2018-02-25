@@ -13,7 +13,16 @@ public class IntegerRings {
             return -1;
         }
         else {
-            return eer.snd.fst;
+            long candidate = eer.snd.fst;
+            if (candidate < 0) {
+                candidate *= -1;
+                candidate = candidate % modulus;
+                candidate = modulus - candidate;
+            }
+            else {
+                candidate = candidate % modulus;
+            }
+            return candidate;
         }
     }
 
@@ -24,6 +33,7 @@ public class IntegerRings {
 
     // given two positive integers i, j:
     // compute gcd(i,j) and a,b such that a * j + b * i = gcd(i,j)
+    // a and b are not unique and might be negative
     public static Tuple<Long, Tuple<Long, Long>> extendedEuclidean(long i, long j) {
         // if j is smaller swap the inputs
         if (j < i) {

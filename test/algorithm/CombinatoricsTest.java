@@ -1,6 +1,11 @@
 package algorithm;
 
+import data.Tuple;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,6 +20,7 @@ class CombinatoricsTest {
         // with modulus
         assertEquals(0, Combinatorics.nChooseK(5, 3, 5));
         assertEquals(6, Combinatorics.nChooseK(10, 2, 13));
+        assertEquals(10, Combinatorics.nChooseK(1000, 483, 13));
     }
 
     @Test
@@ -28,5 +34,16 @@ class CombinatoricsTest {
         assertEquals(6, combinations[10][2]);
         assertEquals(7, combinations[6][3]);
         assertEquals(1, combinations[10][10]);
+    }
+
+    @Test
+    void testFastNChooseK() {
+        assertEquals(1, Combinatorics.nChooseKModuloPrime(0,0,13));
+        assertEquals(2, Combinatorics.nChooseKModuloPrime(2,1,13));
+        assertEquals(10, Combinatorics.nChooseKModuloPrime(5,3,13));
+        assertEquals(6, Combinatorics.nChooseKModuloPrime(10,2,13));
+        assertEquals(7, Combinatorics.nChooseKModuloPrime(6,3,13));
+        assertEquals(1, Combinatorics.nChooseKModuloPrime(10,10,13));
+        assertEquals(10, Combinatorics.nChooseKModuloPrime(1000,483,13));
     }
 }

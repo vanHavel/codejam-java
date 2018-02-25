@@ -21,28 +21,44 @@ public class Combinatorics {
         return dp[k];
     }
 
-    // calculate nChooseK in O(n) for small modulus, for a list of inputs (n,k)
-    public static List<Integer> smallModulusNChooseK(List<Tuple<Integer, Integer>> nks, int modulus) {
-        // precompute inverses modulo modulus
-        int[] inverses = new int[modulus];
-        for (int i = 1; i < modulus; ++i) {
-            inverses[i] = (int) IntegerRings.modularInverse(i, modulus);
-        }
-        // evaluate factorials
-        List<Integer> coeffs = new LinkedList<>();
-        for (Tuple<Integer, Integer> nk : nks) {
-            int n = nk.fst;
-            int k = nk.snd;
-            int res = 1;
-            for (int i = 0; i < k; ++i) {
-                res = (res * (n - i)) % modulus;
+    // calculate nChooseK in O(n) modulo a prime number
+    public static long nChooseKModuloPrime(int n, int k, int modulus) {
+            if (k > n / 2) {
+                k = n - k;
             }
-            for (int i = 0; i < (n - k); ++i) {
-                res = (res * inverses[i]) % modulus;
+            if (k == 0) {
+                return 1;
             }
-            coeffs.add(res);
-        }
-        return coeffs;
+            else if (n < k || n <= 0) {
+                return 0;
+            }
+            else {
+                int num = 1;
+                int denom = 1;
+                long numFactors = 0;
+                long denomFactors = 0;
+                for (int i = 0; i < k; ++i) {
+                    int cur = n - i;
+                    while (cur % modulus == 0) {
+                        cur /= modulus;
+                        numFactors++;
+                    }
+                    num = (num * cur) % modulus;
+                    cur = i + 1;
+                    while (cur % modulus == 0) {
+                        cur /= modulus;
+                        denomFactors++;
+                    }
+                    denom = (denom * cur) % modulus;
+                }
+                if (numFactors > denomFactors) {
+                    return 0;
+                }
+                else {
+                    int invDenom = (int) IntegerRings.modularInverse(denom, modulus);
+                    return (num * invDenom) % modulus;
+                }
+            }
     }
 
 
