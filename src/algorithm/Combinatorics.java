@@ -23,45 +23,26 @@ public class Combinatorics {
 
     // calculate nChooseK in O(n) modulo a prime number
     public static int nChooseKModuloPrime(int n, int k, int modulus) {
-            // empty and full sets
-            if (k == 0 || k == n) {
-                return 1;
+        if (k > n) {
+            return 0;
+        }
+        else if (n < modulus) {
+            int num = 1;
+            int denom = 1;
+            for (int i = 0; i < k; ++i) {
+                num = (num * (n-i)) % modulus;
+                denom = (denom * (i+1)) % modulus;
             }
-            // pathological cases
-            else if (n < k || n <= 0 || k < 0) {
-                return 0;
-            }
-            else {
-                // use smaller k
-                if (k > n / 2) {
-                    k = n - k;
-                }
-                int num = 1;
-                int denom = 1;
-                long numFactors = 0;
-                long denomFactors = 0;
-                for (int i = 0; i < k; ++i) {
-                    int cur = n - i;
-                    while (cur % modulus == 0) {
-                        cur /= modulus;
-                        numFactors++;
-                    }
-                    num = (num * cur) % modulus;
-                    cur = i + 1;
-                    while (cur % modulus == 0) {
-                        cur /= modulus;
-                        denomFactors++;
-                    }
-                    denom = (denom * cur) % modulus;
-                }
-                if (numFactors > denomFactors) {
-                    return 0;
-                }
-                else {
-                    int invDenom = (int) IntegerRings.modularInverse(denom, modulus);
-                    return (num * invDenom) % modulus;
-                }
-            }
+            return (num * (int) IntegerRings.modularInverse(denom, modulus)) % modulus;
+        }
+        else {
+            int nDiv = n / modulus;
+            int nMod = n % modulus;
+            int kDiv = k / modulus;
+            int kMod = k % modulus;
+            return (nChooseKModuloPrime(nDiv, kDiv, modulus) *
+                    nChooseKModuloPrime(nMod, kMod, modulus)) % modulus;
+        }
     }
 
 
