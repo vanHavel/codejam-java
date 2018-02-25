@@ -22,17 +22,20 @@ public class Combinatorics {
     }
 
     // calculate nChooseK in O(n) modulo a prime number
-    public static long nChooseKModuloPrime(int n, int k, int modulus) {
-            if (k > n / 2) {
-                k = n - k;
-            }
-            if (k == 0) {
+    public static int nChooseKModuloPrime(int n, int k, int modulus) {
+            // empty and full sets
+            if (k == 0 || k == n) {
                 return 1;
             }
-            else if (n < k || n <= 0) {
+            // pathological cases
+            else if (n < k || n <= 0 || k < 0) {
                 return 0;
             }
             else {
+                // use smaller k
+                if (k > n / 2) {
+                    k = n - k;
+                }
                 int num = 1;
                 int denom = 1;
                 long numFactors = 0;

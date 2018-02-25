@@ -20,7 +20,9 @@ class CombinatoricsTest {
         // with modulus
         assertEquals(0, Combinatorics.nChooseK(5, 3, 5));
         assertEquals(6, Combinatorics.nChooseK(10, 2, 13));
+        // large numbers
         assertEquals(10, Combinatorics.nChooseK(1000, 483, 13));
+        assertEquals(0, Combinatorics.nChooseK(10000, 4832, 13));
     }
 
     @Test
@@ -38,12 +40,15 @@ class CombinatoricsTest {
 
     @Test
     void testFastNChooseK() {
+        // tests like for combinations
         assertEquals(1, Combinatorics.nChooseKModuloPrime(0,0,13));
         assertEquals(2, Combinatorics.nChooseKModuloPrime(2,1,13));
         assertEquals(10, Combinatorics.nChooseKModuloPrime(5,3,13));
         assertEquals(6, Combinatorics.nChooseKModuloPrime(10,2,13));
         assertEquals(7, Combinatorics.nChooseKModuloPrime(6,3,13));
         assertEquals(1, Combinatorics.nChooseKModuloPrime(10,10,13));
+        // large numbers
         assertEquals(10, Combinatorics.nChooseKModuloPrime(1000,483,13));
+        assertEquals(0, Combinatorics.nChooseKModuloPrime(10000,4832,13));
     }
 }

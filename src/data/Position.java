@@ -40,4 +40,12 @@ public class Position {
                 ", y=" + y +
                 '}';
     }
+
+    public int getY() {
+        return this.y;
+    }
+
+    public int getX() {
+        return this.x;
+    }
 }
