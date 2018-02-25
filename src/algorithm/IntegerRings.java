@@ -63,4 +63,19 @@ public class IntegerRings {
         }
         return new Tuple<>(oldRest, new Tuple<>(oldB, oldA));
     }
+
+    // square and multiply with modulus
+    public static long modularExponentiation(long base, long exponent, long modulus) {
+        if (exponent == 0) {
+            return 1;
+        }
+        else {
+            long rec = modularExponentiation(base, exponent >> 1, modulus);
+            long res = (rec * rec) % modulus;
+            if (exponent % 2 == 1) {
+                res = (res * base) % modulus;
+            }
+            return res;
+        }
+    }
 }
