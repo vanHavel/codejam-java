@@ -20,4 +20,20 @@ public class MyUtility {
         };
     }
 
+    public static long arrayMin(long[] a) {
+        long best = Long.MAX_VALUE;
+        for (int i = 0; i < a.length; ++i) {
+            best = Math.min(a[i], best);
+        }
+        return best;
+    }
+
+    public static long arrayMax(long[] a) {
+        long best = Long.MIN_VALUE;
+        for (int i = 0; i < a.length; ++i) {
+            best = Math.max(a[i], best);
+        }
+        return best;
+    }
+
 }
