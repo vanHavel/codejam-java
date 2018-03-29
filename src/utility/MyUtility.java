@@ -39,8 +39,8 @@ public class MyUtility {
         return best;
     }
 
-    // performs trinary search to obtain maximum of unimodal function
-    public static <A extends Comparable<A>> long trinarySearch(LongFunction<A> f, long lo, long hi) {
+    // performs ternary search to obtain maximum of unimodal function
+    public static <A extends Comparable<A>> long ternarySearch(LongFunction<A> f, long lo, long hi) {
         while (lo < hi) {
             long mid = lo + (hi - lo) / 2;
             if (f.apply(mid).compareTo(f.apply(mid + 1)) < 0) {
