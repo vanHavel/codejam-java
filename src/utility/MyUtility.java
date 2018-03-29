@@ -2,6 +2,7 @@ package utility;
 
 import java.util.AbstractList;
 import java.util.List;
+import java.util.function.IntFunction;
 import java.util.function.LongFunction;
 
 public class MyUtility {
@@ -39,10 +40,23 @@ public class MyUtility {
         return best;
     }
 
-    // performs ternary search to obtain maximum of unimodal function
+    // performs ternary search to obtain maximum of unimodal function -- long version
     public static <A extends Comparable<A>> long ternarySearch(LongFunction<A> f, long lo, long hi) {
         while (lo < hi) {
             long mid = lo + (hi - lo) / 2;
+            if (f.apply(mid).compareTo(f.apply(mid + 1)) < 0) {
+                lo = mid + 1;
+            } else {
+                hi = mid;
+            }
+        }
+        return lo;
+    }
+
+    // performs ternary search to obtain maximum of unimodal function -- int version
+    public static <A extends Comparable<A>> int ternarySearch(IntFunction<A> f, int lo, int hi) {
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
             if (f.apply(mid).compareTo(f.apply(mid + 1)) < 0) {
                 lo = mid + 1;
             } else {
