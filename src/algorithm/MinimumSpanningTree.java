@@ -12,7 +12,7 @@ public class MinimumSpanningTree {
     private final PriorityQueue<WeightedEdge<Integer>> edges;
     private final int size;
 
-    private Set<Edge> mstEdges;
+    private Set<WeightedEdge<Integer>> mstEdges;
     private int cost;
 
     // initialize with weights array, use -1 for non-existing edges
@@ -54,7 +54,7 @@ public class MinimumSpanningTree {
     }
 
     // get edges of mst
-    public Set<Edge> getEdges() {
+    public Set<WeightedEdge<Integer>> getEdges() {
        return this.mstEdges;
     }
 
