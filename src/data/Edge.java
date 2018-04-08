@@ -2,6 +2,7 @@ package data;
 
 import java.util.Objects;
 
+// this class represents an edge in a graph, identified by its two vertices
 public class Edge {
 
     public final int origin;
