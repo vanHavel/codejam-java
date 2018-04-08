@@ -2,6 +2,7 @@ package utility;
 
 import java.util.AbstractList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.IntFunction;
 import java.util.function.LongFunction;
 
@@ -64,6 +65,19 @@ public class MyUtility {
             }
         }
         return lo;
+    }
+
+    // sample from a given probability distribution
+    public static int sampleFromProbabilities(double[] probs) {
+        Random rand = new Random();
+        double sample = rand.nextDouble();
+        int index = 0;
+        while (index < probs.length && sample > probs[index]) {
+            sample -= probs[index];
+            index++;
+        }
+        // to account for possibly inprecise double arithmetic
+        return Math.min(index, probs.length - 1);
     }
 
 }
