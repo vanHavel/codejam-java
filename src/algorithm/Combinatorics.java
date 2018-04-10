@@ -1,6 +1,7 @@
 package algorithm;
 
 import data.Tuple;
+import utility.ArrayUtility;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -103,6 +104,25 @@ public class Combinatorics {
             }
             return res;
         }
+    }
+
+    // this will work as long as sum of parts is <= 20
+    public static long simpleMultinomial(int[] parts) {
+        int n = ArrayUtility.sum(parts);
+        long res = Combinatorics.faculty(n);
+        for (int i = 0; i < parts.length; ++i) {
+            res /= faculty(parts[i]);
+        }
+        return res;
+    }
+
+    // without overflows this can be computed for n <= 20
+    public static long faculty(int n) {
+        long res = 1;
+        for (int i = 2; i <= n; ++i) {
+            res *= i;
+        }
+        return res;
     }
 
 

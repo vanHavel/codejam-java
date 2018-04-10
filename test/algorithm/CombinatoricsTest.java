@@ -107,4 +107,16 @@ class CombinatoricsTest {
         oneExpected.add(oneone);
         assertEquals(oneExpected, onePerms);
     }
+
+    @Test
+    void testSimpleMultinomial() {
+        // test empty sequence
+        assertEquals(1, Combinatorics.simpleMultinomial(new int[0]));
+
+        // test (1,1,1)
+        assertEquals(6, Combinatorics.simpleMultinomial(new int[] {1,1,1}));
+
+        // test (1,2,3)
+        assertEquals(60, Combinatorics.simpleMultinomial(new int[] {1,3,2}));
+    }
 }
