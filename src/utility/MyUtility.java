@@ -23,23 +23,7 @@ public class MyUtility {
         };
     }
 
-    // returns minimum in long array
-    public static long arrayMin(long[] a) {
-        long best = Long.MAX_VALUE;
-        for (int i = 0; i < a.length; ++i) {
-            best = Math.min(a[i], best);
-        }
-        return best;
-    }
 
-    // returns maximum in long array
-    public static long arrayMax(long[] a) {
-        long best = Long.MIN_VALUE;
-        for (int i = 0; i < a.length; ++i) {
-            best = Math.max(a[i], best);
-        }
-        return best;
-    }
 
     // performs ternary search to obtain maximum of unimodal function -- long version
     public static <A extends Comparable<A>> long ternarySearch(LongFunction<A> f, long lo, long hi) {
@@ -81,3 +65,5 @@ public class MyUtility {
     }
 
 }
+
+
