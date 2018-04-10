@@ -75,4 +75,36 @@ class CombinatoricsTest {
         twoExpected.add(twoone);
         assertEquals(new HashSet<>(twoExpected), new HashSet<>(twoPerms));
     }
+
+    @Test
+    void testPermutationsMultiset() {
+        // test empty sequence
+        Vector<Integer> empty = new Vector<>();
+        Set<Vector<Integer>> emptyPerms = Combinatorics.permutationsMultiset(empty);
+        Set<Vector<Integer>> expected = new HashSet<>();
+        expected.add(new Vector<>());
+        assertEquals(expected, emptyPerms);
+
+        // test 2 element sequence with distinct elements
+        Vector<Integer> onetwo = new Vector<>();
+        onetwo.add(1);
+        onetwo.add(2);
+        Set<Vector<Integer>> twoPerms = Combinatorics.permutationsMultiset(onetwo);
+        Set<Vector<Integer>> twoExpected = new HashSet<>();
+        Vector<Integer> twoone = new Vector<>();
+        twoone.add(2);
+        twoone.add(1);
+        twoExpected.add(onetwo);
+        twoExpected.add(twoone);
+        assertEquals(twoExpected, twoPerms);
+
+        // test 2 element sequence with identical elements
+        Vector<Integer> oneone = new Vector<>();
+        oneone.add(1);
+        oneone.add(1);
+        Set<Vector<Integer>> onePerms = Combinatorics.permutationsMultiset(oneone);
+        Set<Vector<Integer>> oneExpected = new HashSet<>();
+        oneExpected.add(oneone);
+        assertEquals(oneExpected, onePerms);
+    }
 }

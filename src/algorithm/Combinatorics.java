@@ -68,14 +68,38 @@ public class Combinatorics {
         }
         else {
             Vector<Vector<A>> res = new Vector<>();
-            for (A a : new Vector<>(elements)) {
-                elements.remove(a);
-                Vector<Vector<A>> rec = permutations(elements);
+            Set<A> elementsCopy = new HashSet<>(elements);
+            for (A a : elements) {
+                elementsCopy.remove(a);
+                Vector<Vector<A>> rec = permutations(elementsCopy);
                 for (Vector<A> vec : rec) {
                     vec.add(a);
                     res.add(vec);
                 }
-                elements.add(a);
+                elementsCopy.add(a);
+            }
+            return res;
+        }
+    }
+
+    // returns all unique permutations of a given sequence (not necessarily of unique elements)
+    public static <A> Set<Vector<A>> permutationsMultiset(Vector<A> elements) {
+        if (elements.isEmpty()) {
+            Set<Vector<A>> res = new HashSet<>();
+            res.add(new Vector<>());
+            return res;
+        }
+        else {
+            Vector<A> elementsCopy = new Vector<>(elements);
+            Set<Vector<A>> res = new HashSet<>();
+            for (A a : elements) {
+                elementsCopy.remove(a);
+                Set<Vector<A>> rec = permutationsMultiset(elementsCopy);
+                for (Vector<A> vec : rec) {
+                    vec.add(a);
+                    res.add(vec);
+                }
+                elementsCopy.add(a);
             }
             return res;
         }
