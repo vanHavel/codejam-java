@@ -2,8 +2,8 @@ package algorithm;
 
 import data.Tuple;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
 // this class implements combinatorical algorithms, such as computing binomial coefficients
 public class Combinatorics {
@@ -57,6 +57,28 @@ public class Combinatorics {
             dp[i][0] = 1;
         }
         return dp;
+    }
+
+    // returns all permutations of a given set
+    public static <A> Vector<Vector<A>> permutations(Set<A> elements) {
+        if (elements.isEmpty()) {
+            Vector<Vector<A>> res = new Vector<>();
+            res.add(new Vector<>());
+            return res;
+        }
+        else {
+            Vector<Vector<A>> res = new Vector<>();
+            for (A a : new Vector<>(elements)) {
+                elements.remove(a);
+                Vector<Vector<A>> rec = permutations(elements);
+                for (Vector<A> vec : rec) {
+                    vec.add(a);
+                    res.add(vec);
+                }
+                elements.add(a);
+            }
+            return res;
+        }
     }
 
 

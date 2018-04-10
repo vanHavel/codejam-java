@@ -3,9 +3,7 @@ package algorithm;
 import data.Tuple;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,5 +48,31 @@ class CombinatoricsTest {
         // large numbers
         assertEquals(10, Combinatorics.nChooseKModuloPrime(1000,483,13));
         assertEquals(0, Combinatorics.nChooseKModuloPrime(10000,4832,13));
+    }
+
+    @Test
+    void testPermutations() {
+        // test empty set
+        Set<Integer> empty = new HashSet<>();
+        Vector<Vector<Integer>> emptyPerms = Combinatorics.permutations(empty);
+        Vector<Vector<Integer>> expected = new Vector<>();
+        expected.add(new Vector<>());
+        assertEquals(expected, emptyPerms);
+
+        // test 2 element set
+        Set<Integer> two = new HashSet<>();
+        two.add(1);
+        two.add(2);
+        Vector<Vector<Integer>> twoPerms = Combinatorics.permutations(two);
+        Vector<Vector<Integer>> twoExpected = new Vector<>();
+        Vector<Integer> onetwo = new Vector<>();
+        Vector<Integer> twoone = new Vector<>();
+        onetwo.add(1);
+        onetwo.add(2);
+        twoone.add(2);
+        twoone.add(1);
+        twoExpected.add(onetwo);
+        twoExpected.add(twoone);
+        assertEquals(new HashSet<>(twoExpected), new HashSet<>(twoPerms));
     }
 }
