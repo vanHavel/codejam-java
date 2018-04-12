@@ -122,4 +122,27 @@ public class MinHeap<A> {
         this.poll();
     }
 
+    // check whether heap is empty
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
+
+    // check whether heap contains element
+    public boolean contains(A element) {
+        return this.elementsToId.containsKey(element) && this.elementsToId.get(element) < this.size;
+    }
+
+
+    // get key of an element
+    public long getKey(A element) {
+        return this.heap[this.elementsToId.get(element)];
+    }
+
+    // get key of smallest element
+    public long minimumKey() {
+        if (this.size == 0) {
+            throw new IllegalStateException("Can not get minimum key from emtpy heap");
+        }
+        return this.heap[0];
+    }
 }

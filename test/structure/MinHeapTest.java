@@ -1,10 +1,8 @@
 package structure;
 
-import algorithm.MinimumSpanningTree;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,16 +14,25 @@ class MinHeapTest {
 
         // extracting from empty heap should fail
         assertEquals(0, heap.getSize());
+        assertTrue(heap.isEmpty());
         assertThrows(IllegalStateException.class, heap::peek);
         assertThrows(IllegalStateException.class, heap::poll);
+        assertThrows(IllegalStateException.class, heap::minimumKey);
 
         // testing inserting and polling one element
         heap.insert("london", 6);
         assertEquals(1, heap.getSize());
+        assertTrue(heap.contains("london"));
         assertEquals("london", heap.peek());
         assertEquals(1, heap.getSize());
+        assertEquals(6, heap.getKey("london"));
+        assertFalse(heap.isEmpty());
+        assertEquals(6, heap.minimumKey());
+
         assertEquals("london", heap.poll());
         assertEquals(0, heap.getSize());
+        assertTrue(heap.isEmpty());
+        assertFalse(heap.contains("london"));
         assertThrows(IllegalStateException.class, heap::peek);
 
         // testing multiple elements
@@ -35,6 +42,7 @@ class MinHeapTest {
         heap.insert("rome", 4);
         assertEquals(4, heap.getSize());
         assertEquals("rome", heap.peek());
+        assertEquals(8, heap.getKey("virginia"));
 
         // test inserting too much
         assertThrows(IllegalStateException.class, () -> heap.insert("washington", 10));
@@ -43,6 +51,7 @@ class MinHeapTest {
         heap.decreaseKey("virginia", 2);
         assertEquals(4, heap.getSize());
         assertEquals("virginia", heap.peek());
+        assertEquals(2, heap.getKey("virginia"));
 
         // test delete
         heap.delete("rome");
