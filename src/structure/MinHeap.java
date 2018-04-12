@@ -11,6 +11,11 @@ public class MinHeap<A> {
     private long[] heap;
     private Vector<A> idToElements;
     private Map<A, Integer> elementsToId;
+
+    public int getSize() {
+        return this.size;
+    }
+
     private int size;
 
     // initialize minHeap with maximum size and key extractor function for objects
@@ -23,11 +28,16 @@ public class MinHeap<A> {
 
     // insert a new item into the heap
     public void insert(A element, long key) {
-        if (size == heap.length) {
+        if (this.size == heap.length) {
             throw new IllegalStateException("Can not insert into full heap");
         }
         this.heap[this.size] = key;
-        this.idToElements.set(this.size, element);
+        if (this.idToElements.size() > this.size) {
+            this.idToElements.set(this.size, element);
+        }
+        else {
+            this.idToElements.add(this.size, element);
+        }
         this.elementsToId.put(element, this.size);
         this.pushUp(this.size);
         this.size++;
@@ -60,6 +70,9 @@ public class MinHeap<A> {
 
     // look at element at the top of the heap
     public A peek() {
+        if (this.size == 0) {
+            throw new IllegalStateException("Can not poll from empty heap.");
+        }
         return this.idToElements.get(0);
     }
 
