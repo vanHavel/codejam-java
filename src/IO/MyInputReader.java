@@ -43,6 +43,10 @@ public class MyInputReader {
         return this.scanner.nextFloat();
     }
 
+    public boolean hasNext() {
+        return this.scanner.hasNext();
+    }
+
     public char nextStandAloneChar() {
         String next = this.scanner.next();
         if (next.length() == 1) {
