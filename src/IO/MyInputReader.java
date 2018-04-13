@@ -1,6 +1,8 @@
 package IO;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -10,9 +12,11 @@ import java.util.regex.Pattern;
 public class MyInputReader {
 
     private Scanner scanner;
+    private BufferedReader reader;
 
     public MyInputReader(InputStream in) {
-        this.scanner = new Scanner(in);
+        this.reader = new BufferedReader(new InputStreamReader(in), 1000000);
+        this.scanner = new Scanner(reader);
     }
 
     public int nextInt() {
