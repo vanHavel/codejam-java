@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
-// this class implements Dijkstra's shortest path algorithm
+// this class implements Dijkstra's shortest path algorithm on simple, directed graphs
 public class Dijkstra {
 
     private final Vector<List<WeightedEdge<Long>>> adjacencyLists;
@@ -18,6 +18,8 @@ public class Dijkstra {
     // initialize with adjacency list of weighted edge. Distances must be nonnegative.
     public Dijkstra(Vector<List<WeightedEdge<Long>>> adjacencyLists) {
         this.adjacencyLists = adjacencyLists;
+        this.distances = new long[adjacencyLists.size()];
+        this.predecessors = new int[adjacencyLists.size()];
     }
 
     // compute all shortest path from a given source
@@ -28,10 +30,12 @@ public class Dijkstra {
             this.predecessors[i] = -1;
         }
         this.distances[source] = 0;
+        this.predecessors[source] = source;
         // initialize heap
         MinHeap<Integer> heap = new MinHeap<>(adjacencyLists.size());
         for (WeightedEdge<Long> e : adjacencyLists.get(source)) {
             heap.insert(e.target, e.weight);
+            this.predecessors[e.target] = source;
         }
         while (!heap.isEmpty()) {
             // we have found the shortest path to the head of the queue
