@@ -93,6 +93,27 @@ public class MyUtility {
         return Math.min(index, probs.length - 1);
     }
 
+    // raise integer to a power using square and multiply
+    public static long integerPower(long base, int exponent) {
+        switch (exponent) {
+            case 0:
+                return 1;
+            case 1:
+                return base;
+            case 2:
+                return base * base;
+            default:
+                int div = exponent / 2;
+                int mod = exponent % 2;
+                long rec = integerPower(base, div);
+                long res = rec * rec;
+                if (mod == 1) {
+                    res *= base;
+                }
+                return res;
+        }
+    }
+
 }
 
 
