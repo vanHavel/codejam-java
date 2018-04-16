@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.IntFunction;
 import java.util.function.LongFunction;
+import java.util.function.Predicate;
 
 public class MyUtility {
 
@@ -46,6 +47,34 @@ public class MyUtility {
                 lo = mid + 1;
             } else {
                 hi = mid;
+            }
+        }
+        return lo;
+    }
+
+    // return first index that satisfies test
+    public static long binarySearchFirst(long lo, long hi, Predicate<Long> test) {
+        while (lo < hi) {
+            long mid = lo + (hi - lo) / 2;
+            if (test.test(mid)) {
+                hi = mid;
+            }
+            else {
+                lo = mid+1;
+            }
+        }
+        return lo;
+    }
+
+    // return last index that satisfies test
+    public static long binarySearchLast(long lo, long hi, Predicate<Long> test) {
+        while (lo < hi) {
+            long mid = hi - (hi - lo) / 2;
+            if (test.test(mid)) {
+                lo = mid;
+            }
+            else {
+                hi = mid-1;
             }
         }
         return lo;
