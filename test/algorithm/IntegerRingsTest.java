@@ -4,6 +4,9 @@ import data.Pair;
 import data.Tuple;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class IntegerRingsTest {
@@ -31,5 +34,24 @@ class IntegerRingsTest {
         assertEquals(81, IntegerRings.modularExponentiation(3,4,202));
         assertEquals(125 % 7, IntegerRings.modularExponentiation(5,3,7));
         assertEquals(1, IntegerRings.modularExponentiation(434,0,66445));
+    }
+
+    @Test
+    public void testCrt() {
+        List<Pair<Long>> constraints = new LinkedList<>();
+        constraints.add(new Pair<>(0L,3L));
+        Pair<Long> solution = IntegerRings.chineseRemainderTheorem(constraints);
+        assertEquals(0L, (long) solution.fst);
+        assertEquals(3L, (long) solution.snd);
+
+        constraints.add(new Pair<>(3L,4L));
+        solution = IntegerRings.chineseRemainderTheorem(constraints);
+        assertEquals(3L, (long) solution.fst);
+        assertEquals(12L, (long) solution.snd);
+
+        constraints.add(new Pair<>(4L,5L));
+        solution = IntegerRings.chineseRemainderTheorem(constraints);
+        assertEquals(39L, (long) solution.fst);
+        assertEquals(60L, (long) solution.snd);
     }
 }

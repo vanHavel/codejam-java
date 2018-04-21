@@ -117,14 +117,14 @@ public class IntegerRings {
         long m1 = coeffs.fst;
         long m2 = coeffs.snd;
 
-        // solution is a1m2n2 + a2m1n1, be careful with mod to avoid overflows
+        // solution is a1m2n2 + a2m1n1
         long mod = n1 * n2;
 
-        long tmp = (a1 * m2) % mod;
-        tmp = (tmp * n2) % mod;
-        long tmp2 = (a2 * m1) % mod;
-        tmp2 = (tmp2 * n1) % mod;
-        long res = (tmp + tmp2) % mod;
+        long res = a1 * m2 * n2 + a2 * m1 * n1;
+        if (res < 0) {
+            res = (res % mod) + mod;
+        }
+        res = res % mod;
 
         return new Pair<>(res, mod);
     }
