@@ -1,5 +1,6 @@
 package utility;
 
+// this class contains utility functions for bit operations on integers
 public class BitUtility {
 
     // test whether given bit is set
