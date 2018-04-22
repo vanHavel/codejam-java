@@ -42,7 +42,7 @@ public class Complex {
     public static Complex divide(Complex c1, Complex c2) {
         double denom = c2.real * c2.real + c2.imaginary * c2.imaginary;
         double realNum = c1.real * c2.real + c1.imaginary * c2.imaginary;
-        double imagNum = c1.real * c2.imaginary - c2.real * c1.imaginary;
+        double imagNum = c2.real * c1.imaginary - c1.real * c2.imaginary;
         return new Complex(realNum / denom, imagNum / denom);
     }
     public Complex divide(Complex rhs) {
