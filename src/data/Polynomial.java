@@ -34,18 +34,19 @@ public class Polynomial {
         return Polynomial.multiply(this, rhs);
     }
     public static Polynomial multiply(Polynomial p1, Polynomial p2) {
-        Complex[] fft1 = FastFourierTransformer.fft(p1.coefficients);
-        Complex[] fft2 = FastFourierTransformer.fft(p2.coefficients);
-        int n = Math.max(fft1.length, fft1.length);
+        int productDegree = p1.coefficients.length + p2.coefficients.length;
+        Complex[] coefficients1 = new Complex[productDegree];
+        Complex[] coefficients2 = new Complex[productDegree];
+        for (int i = 0; i < productDegree; ++i) {
+            coefficients1[i] = i < p1.coefficients.length ? p1.coefficients[i] : Complex.ZERO;
+            coefficients2[i] = i < p2.coefficients.length ? p2.coefficients[i] : Complex.ZERO;
+        }
+        Complex[] fft1 = FastFourierTransformer.fft(coefficients1);
+        Complex[] fft2 = FastFourierTransformer.fft(coefficients2);
+        int n = fft1.length;
         Complex[] multipliedValuations = new Complex[n];
         for (int i = 0; i < n; ++i) {
-            multipliedValuations[i] = Complex.ONE;
-            if (i < fft1.length) {
-                multipliedValuations[i] =  multipliedValuations[i].multiply(fft1[i]);
-            }
-            if (i < fft2.length) {
-                multipliedValuations[i] =  multipliedValuations[i].multiply(fft2[i]);
-            }
+            multipliedValuations[i] =  fft1[i].multiply(fft2[i]);
         }
         Complex[] productCoefficients = FastFourierTransformer.inverseFft(multipliedValuations);
         return new Polynomial(productCoefficients);
