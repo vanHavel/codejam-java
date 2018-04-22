@@ -87,17 +87,14 @@ public class Complex {
     }
 
     // some constants
-    public static Complex ONE() {
-        return new Complex(1,0);
-    }
-    public static Complex ZERO() {
-        return new Complex(0,0);
-    }
-    public static Complex I() {
-        return new Complex(0,1);
-    }
-    public static Complex E() {
-        return new Complex(Math.E, 0);
+    public static final Complex ONE = new Complex(1,0);
+    public static final Complex ZERO = new Complex(0,0);
+    public static final Complex I = new Complex(0,1);
+    public static final Complex E = new Complex(Math.E, 0);
+
+    // real numbers
+    public static Complex realNumber(double d) {
+        return new Complex(d, 0);
     }
 
     @Override

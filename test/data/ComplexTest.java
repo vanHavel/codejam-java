@@ -39,6 +39,9 @@ class ComplexTest {
 
         assertEquals(-13.128, Complex.exp(c1).real, 0.01);
         assertEquals(-15.2, Complex.exp(c1).imaginary, 0.01);
+
+        assertEquals(-0.5, Complex.rootOfUnity(3).real, 0.01);
+        assertEquals(0.5 * Math.sqrt(3), Complex.rootOfUnity(3).imaginary, 0.01);
     }
 
 }
