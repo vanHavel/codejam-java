@@ -6,16 +6,8 @@ import data.Complex;
 // into polynomials with valuations at roots of unity (and back)
 public class FastFourierTransformer {
 
-    public Complex[] fft(double[] coefficients) {
-        int n = coefficients.length;
-        Complex[] cs = new Complex[n];
-        for (int i = 0; i < n; ++i) {
-            cs[i] = new Complex(coefficients[i], 0);
-        }
-        return this.fft(cs);
-    }
-
-    public Complex[] fft(Complex[] coefficients) {
+    // perform fft
+    public static Complex[] fft(Complex[] coefficients) {
         // extend to power of 2
         int c = coefficients.length;
         int nearestPower = 1;
@@ -35,11 +27,11 @@ public class FastFourierTransformer {
 
         // call recursive fft
         Complex omegaN = Complex.rootOfUnity(nearestPower);
-        return this.fftDivideAndConquer(coefficients, omegaN);
+        return FastFourierTransformer.fftDivideAndConquer(coefficients, omegaN);
     }
 
     // coefficients.length must be power of 2
-    private Complex[] fftDivideAndConquer(Complex[] coefficients, Complex omegaN) {
+    private static Complex[] fftDivideAndConquer(Complex[] coefficients, Complex omegaN) {
         int n = coefficients.length;
         if (n == 1) {
             return new Complex[] {coefficients[0]};
@@ -51,8 +43,8 @@ public class FastFourierTransformer {
             evens[i] = coefficients[2*i];
             odds[i] = coefficients[2*i+1];
         }
-        Complex[] evenRec = this.fftDivideAndConquer(evens, omegaN.multiply(omegaN));
-        Complex[] oddRec = this.fftDivideAndConquer(odds, omegaN.multiply(omegaN));
+        Complex[] evenRec = FastFourierTransformer.fftDivideAndConquer(evens, omegaN.multiply(omegaN));
+        Complex[] oddRec = FastFourierTransformer.fftDivideAndConquer(odds, omegaN.multiply(omegaN));
         Complex[] res = new Complex[n];
         for (int i = 0; i < n / 2; ++i) {
             res[i] = evenRec[i].add(omega.multiply(oddRec[i]));
@@ -63,13 +55,14 @@ public class FastFourierTransformer {
     }
 
     // valuations.length must be power of 2
-    public Complex[] inverseFft(Complex[] valuations) {
+    public static Complex[] inverseFft(Complex[] valuations) {
         int n = valuations.length;
         Complex omegaNInverse = Complex.ONE.divide(Complex.rootOfUnity(n));
-        Complex[] ffted = this.fftDivideAndConquer(valuations, omegaNInverse);
+        Complex[] ffted = FastFourierTransformer.fftDivideAndConquer(valuations, omegaNInverse);
         for (int i = 0; i < n; ++i) {
             ffted[i] = ffted[i].divide(Complex.realNumber(n));
         }
         return ffted;
     }
+
 }
