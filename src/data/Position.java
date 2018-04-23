@@ -14,8 +14,12 @@ public class Position {
         this.y = y;
     }
 
-    public int manhattanDistance(Position other) {
-        return Math.abs(this.x - other.x) + Math.abs(this.y - other.y);
+    // manhattan distance
+    public int manhattanDistanceTo(Position other) {
+        return Position.manhattanDistance(this, other);
+    }
+    public static int manhattanDistance(Position p1, Position p2) {
+        return Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y);
     }
 
     @Override
@@ -41,11 +45,4 @@ public class Position {
                 '}';
     }
 
-    public int getY() {
-        return this.y;
-    }
-
-    public int getX() {
-        return this.x;
-    }
 }

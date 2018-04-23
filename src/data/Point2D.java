@@ -17,6 +17,10 @@ public class Point2D {
     public static double distance(Point2D p1, Point2D p2) {
         return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
     }
+    // member function for euclidian distance
+    public double distanceTo(Point2D other) {
+        return Point2D.distance(this, other);
+    }
 
     // manhattan distance
     public static double manhattanDistance(Point2D p1, Point2D p2) {
@@ -55,11 +59,6 @@ public class Point2D {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
-    }
-
-    // member function for euclidian distance
-    public double distanceTo(Point2D other) {
-        return Point2D.distance(this, other);
     }
 
 

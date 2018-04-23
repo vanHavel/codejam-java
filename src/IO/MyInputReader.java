@@ -128,7 +128,7 @@ public class MyInputReader {
         int[][] res = new int[n][m];
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < m; ++j) {
-                res[i][j] = lines[i].charAt(j);
+                res[i][j] = lines[i].charAt(j) - '0';
             }
         }
         return res;
