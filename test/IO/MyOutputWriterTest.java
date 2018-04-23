@@ -1,5 +1,6 @@
 package IO;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +19,11 @@ class MyOutputWriterTest {
     public void setUp() {
         stringStream = new ByteArrayOutputStream();
         writer = new MyOutputWriter(stringStream);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        writer.close();
     }
 
     @Test
@@ -43,7 +49,7 @@ class MyOutputWriterTest {
 
     @Test
     public void testPrintSolutionChar() throws IOException {
-        writer.printSolution(1, "c");
+        writer.printSolution(1, 'c');
         writer.flush();
         assertEquals("Case #1: c\n", stringify(stringStream));
     }
@@ -64,7 +70,7 @@ class MyOutputWriterTest {
 
     @Test
     public void testPrintSolutionFloat() throws IOException {
-        writer.printSolution(1, 2.0);
+        writer.printSolution(1, 2.0f);
         writer.flush();
         assertEquals("Case #1: 2.0\n", stringify(stringStream));
     }

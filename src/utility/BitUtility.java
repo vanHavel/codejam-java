@@ -8,7 +8,7 @@ public class BitUtility {
         return (i & (1 << bit)) != 0;
     }
     public static boolean isSet(long l, int bit) {
-        return (l & (1 << bit)) != 0;
+        return (l & (1L << bit)) != 0;
     }
 
     // set given bit
@@ -16,7 +16,7 @@ public class BitUtility {
         return (i | (1 << bit));
     }
     public static long setBit(long l, int bit) {
-        return (l | (1 << bit));
+        return (l | (1L << bit));
     }
 
     // clear given bit
@@ -24,7 +24,7 @@ public class BitUtility {
         return (i & ~(1 << bit));
     }
     public static long clearBit(long l, int bit) {
-        return (l & ~(1 << bit));
+        return (l & ~(1L << bit));
     }
 
     // return number of set bits
