@@ -54,4 +54,8 @@ public class MyOutputWriter {
     public void close() {
         this.writer.close();
     }
+
+    public void flush() {
+        this.writer.flush();
+    }
 }
