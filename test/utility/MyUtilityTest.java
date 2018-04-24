@@ -1,5 +1,6 @@
 package utility;
 
+import IO.MyInputReader;
 import algorithm.Combinatorics;
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +29,7 @@ class MyUtilityTest {
         assertEquals(1024, MyUtility.integerPower(2, 10));
         assertEquals(81, MyUtility.integerPower(3, 4));
         assertEquals(125, MyUtility.integerPower(5, 3));
+        assertEquals(1, MyUtility.integerPower(2,0));
     }
 
     @Test
@@ -36,6 +38,21 @@ class MyUtilityTest {
         Predicate<Long> test = i -> arr[i.intValue()] >= 5 && arr[i.intValue()] <= 10;
         assertEquals(4, MyUtility.binarySearchFirst(0,14, test));
         assertEquals(9, MyUtility.binarySearchLast(0,14, test));
+    }
+
+    @Test
+    void testSampling() {
+        int tries = 10000;
+        double[] probs = new double[] {0.5, 0.2, 0.3};
+
+        double[] counts = new double[] {0,0,0};
+        for (int i = 0; i < tries; ++i) {
+            counts[MyUtility.sampleFromProbabilities(probs)]++;
+        }
+        for (int i = 0; i < 3; ++i) {
+            counts[i] /= tries;
+        }
+        assertArrayEquals(probs, counts, 0.01);
     }
 
 }
