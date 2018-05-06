@@ -20,6 +20,27 @@ public class ArrayUtility {
         return best;
     }
 
+    // reverse an int array in place
+    public static void reverse(int[] a) {
+        int n = a.length;
+        for (int i = 0; i < n / 2; ++i) {
+            int tmp = a[i];
+            a[i] = a[n-1-i];
+            a[n-1-i] = tmp;
+        }
+    }
+
+    // reverse a long array in place
+    public static void reverse(long[] a) {
+        int n = a.length;
+        for (int i = 0; i < n / 2; ++i) {
+            long tmp = a[i];
+            a[i] = a[n-1-i];
+            a[n-1-i] = tmp;
+        }
+    }
+
+
     // returns sum of long array
     public static long sum(long[] a) {
         long res = 0;
