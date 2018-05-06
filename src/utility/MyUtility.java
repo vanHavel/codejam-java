@@ -114,6 +114,30 @@ public class MyUtility {
         }
     }
 
+    // permute an int array randomly using fisher-yates shuffling
+    public static void randomPermutation(int[] a) {
+        int n = a.length;
+        Random r  = new Random();
+        for (int i = 0; i < n; ++i) {
+            int offset = r.nextInt(n-i);
+            int tmp = a[i];
+            a[i] = a[i + offset];
+            a[i + offset] = tmp;
+        }
+    }
+
+    // permute a long array randomly using fisher-yates shuffling
+    public static void randomPermutation(long[] a) {
+        int n = a.length;
+        Random r  = new Random();
+        for (int i = 0; i < n; ++i) {
+            int offset = r.nextInt(n-i);
+            long tmp = a[i];
+            a[i] = a[i + offset];
+            a[i + offset] = tmp;
+        }
+    }
+
 }
 
 
