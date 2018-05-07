@@ -27,6 +27,14 @@ public class BitUtility {
         return (l & ~(1L << bit));
     }
 
+    // toggle given bit
+    public static int toggleBit(int i, int bit) {
+        return (i ^ (1 << bit));
+    }
+    public static long toggleBit(long l, int bit) {
+        return (l ^ (1 << bit));
+    }
+
     // return number of set bits
     public static int popCount(int i) {
         int count = 0;

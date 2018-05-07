@@ -29,6 +29,12 @@ class BitUtilityTest {
         assertFalse(BitUtility.isSet(i, 31));
         assertEquals(2, BitUtility.popCount(i));
 
+        // test toggle
+        i = BitUtility.toggleBit(i, 2);
+        assertTrue(BitUtility.isSet(i,2));
+        i = BitUtility.toggleBit(i, 2);
+        assertFalse(BitUtility.isSet(i, 2));
+
         // test operations that do not change bit patterns
         int j = BitUtility.setBit(i, 0);
         j = BitUtility.clearBit(j, 1);
@@ -57,6 +63,12 @@ class BitUtilityTest {
         assertFalse(BitUtility.isSet(l, 2));
         assertFalse(BitUtility.isSet(l, 63));
         assertEquals(2, BitUtility.popCount(l));
+
+        // test toggle
+        l = BitUtility.toggleBit(l, 2);
+        assertTrue(BitUtility.isSet(l, 2));
+        l = BitUtility.toggleBit(l, 2);
+        assertFalse(BitUtility.isSet(l, 2));
 
         // test operations that do not change bit patterns
         long m = BitUtility.setBit(l, 0);
