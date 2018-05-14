@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
-// this class finds bridges and articulation points in directed graphs
+// this class finds bridges and articulation points in undirected graphs
 public class BridgeDetector {
 
     // the graph's adjacency list
@@ -21,8 +21,8 @@ public class BridgeDetector {
     private int searchCounter = 0;
 
     // result fields
-    Set<Integer> articulationPoints = new HashSet<>();
-    Set<Edge> bridges = new HashSet<>();
+    private Set<Integer> articulationPoints = new HashSet<>();
+    private Set<Edge> bridges = new HashSet<>();
 
     // construct with adjacency list
     public BridgeDetector(Vector<List<Edge>> adjacencyList) {
@@ -49,9 +49,13 @@ public class BridgeDetector {
         for (int i = 0; i < n; ++i) {
             if (this.visitCounter[i] == -1) {
                 int rootChildren = bridgeSearch(i);
+                // special case: root is articulation point ?
                 if (rootChildren > 1) {
-                    // special case: root is articulation points
+
                     articulationPoints.add(i);
+                }
+                else {
+                    articulationPoints.remove(i);
                 }
             }
         }
