@@ -17,6 +17,7 @@ public class StronglyConnectedComponents {
     private boolean[] visited;
     private Stack<Integer> nodeStack;
     private int searchCounter = 0;
+    private int[] componentCount;
 
     // result field
     private LinkedList<Set<Integer>> stronglyConnectedComponents = new LinkedList<>();
@@ -40,6 +41,7 @@ public class StronglyConnectedComponents {
         this.lowestNodeReachable = new int[n];
         this.searchCounter = 0;
         this.nodeStack = new Stack<>();
+        this.componentCount = new int[n];
 
         for (int i = 0; i < n; ++i) {
             if (visitCounter[i] == -1) {
@@ -69,6 +71,7 @@ public class StronglyConnectedComponents {
 
         // triggered at root of SCC
         if (visitCounter[i] == lowestNodeReachable[i]) {
+            int sccCount = this.stronglyConnectedComponents.size();
             this.stronglyConnectedComponents.add(new HashSet<>());
             int j;
             // pop the SCC
@@ -76,6 +79,7 @@ public class StronglyConnectedComponents {
                 j = nodeStack.pop();
                 visited[j] = false;
                 this.stronglyConnectedComponents.getLast().add(j);
+                this.componentCount[j] = sccCount;
             } while (i != j);
         }
 
@@ -89,6 +93,35 @@ public class StronglyConnectedComponents {
     // get list of the SCCs
     public List<Set<Integer>> getStronglyConnectedComponents() {
         return this.stronglyConnectedComponents;
+    }
+
+    // obtain DAG of strongly connected components
+    public Vector<List<Edge>> getComponentDAG() {
+        // collect all edges between components in O(E)
+        Set<Edge> edges = new HashSet<>();
+        for (int i = 0; i < this.adjacencyList.size(); ++i) {
+            for (Edge e : this.adjacencyList.get(i)) {
+                if (this.componentCount[e.target] != this.componentCount[e.origin]) {
+                    edges.add(new Edge(this.componentCount[e.origin], this.componentCount[e.target]));
+                }
+            }
+        }
+
+        // create adjacency list
+        int c = this.stronglyConnectedComponents.size();
+        Vector<List<Edge>> vec = new Vector<>(c);
+        for (int i = 0; i < c; ++i) {
+            vec.add(new ArrayList<>());
+        }
+        for (Edge e : edges) {
+            vec.get(e.origin).add(new Edge(e.origin, e.target));
+        }
+        return vec;
+    }
+
+    // get indices of SCC for each node
+    public int[] getComponentIndices() {
+        return this.componentCount;
     }
 
 }
