@@ -25,7 +25,7 @@ public class BipartiteMatching {
     private int matchingSize = 0;
     private Set<Edge> matching;
 
-    // construct with adjacency matrix
+    // construct with bipartite connection matrix
     // (edges[i][j]: edge between first set node i and second set node j)
     public BipartiteMatching(boolean[][] edges) {
         this.n = edges.length;
@@ -43,6 +43,7 @@ public class BipartiteMatching {
     // using augmenting paths, the complexity is O(VE)
     public void computeMaximumMatching() {
         // initialize all right nodes as unmatched
+        this.matchPartner = new int[m];
         for (int i = 0; i < this.m; ++i) {
             this.matchPartner[i] = -1;
         }
