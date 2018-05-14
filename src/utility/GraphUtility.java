@@ -1,6 +1,7 @@
 package utility;
 
 import data.Edge;
+import data.WeightedEdge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,23 @@ public class GraphUtility {
             }
         }
 
+        return vec;
+    }
+
+    // transforms long matrix of positive weights into adjacency list containing nonzero weights
+    public static Vector<List<WeightedEdge<Long>>> longWeightMatrixToAdjacencyList(long[][] weights) {
+        int n = weights.length;
+        Vector<List<WeightedEdge<Long>>> vec = new Vector(n);
+
+        for (int i = 0; i < n; ++i) {
+            List<WeightedEdge<Long>> list = new ArrayList<>(n);
+            for (int j = 0; j < n; ++j) {
+                if (weights[i][j] != 0) {
+                    list.add(new WeightedEdge(i,j,weights[i][j]));
+                }
+            }
+            vec.add(list);
+        }
         return vec;
     }
 }

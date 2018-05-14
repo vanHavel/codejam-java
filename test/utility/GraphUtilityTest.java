@@ -1,6 +1,7 @@
 package utility;
 
 import data.Edge;
+import data.WeightedEdge;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -39,6 +40,22 @@ class GraphUtilityTest {
         assertEquals(1, adjList.get(1).size());
         assertEquals(2, adjList.get(2).size());
         assertEquals(new Edge(3,0), adjList.get(3).get(0));
+    }
+
+    @Test
+    public void testLongWeightMatrixToAdjacencyList() {
+        long[][] edges = new long[4][];
+        edges[0] = new long[] {0, 1, 2, 3};
+        edges[1] = new long[] {0, 0, 0, 0};
+        edges[2] = new long[] {0, 5, 0, 0};
+        edges[3] = new long[] {0, 10, 11, 0};
+        Vector<List<WeightedEdge<Long>>> adjList = GraphUtility.longWeightMatrixToAdjacencyList(edges);
+
+        assertEquals(4, adjList.size());
+        assertEquals(3, adjList.get(0).size());
+        assertEquals(0, adjList.get(1).size());
+        assertEquals(2, adjList.get(3).size());
+        assertEquals(new WeightedEdge<Long>(2, 1, 5l), adjList.get(2).get(0));
     }
 
 }
