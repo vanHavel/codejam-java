@@ -2,11 +2,10 @@ package algorithm;
 
 import data.Tuple;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
+// this class computes mac flow using ford fulkerson method
+// the implementation uses edmond karp and runs in O(V^3E) because of the adjacency matrix
 public class FordFulkerson {
 
     private int[][] capacities;
@@ -22,12 +21,12 @@ public class FordFulkerson {
 
     // calculate maxFlow value and capacities
     public Tuple<Integer, int[][]> maxFlow() {
-        int[] parents = dfs();
+        int[] parents = bfs();
         int sink = this.capacities.length - 1;
         while (parents[sink] != -1) {
             int increase = this.getIncrease(parents);
             this.increasePath(parents, increase);
-            parents = dfs();
+            parents = bfs();
         }
         int maxFlow = 0;
         for (int i = 0; i < capacities.length; ++i) {
@@ -36,24 +35,24 @@ public class FordFulkerson {
         return new Tuple<>(maxFlow, flow);
     }
 
-    // perform dfs from source to sink in residual network, return parents for each discovered node
-    private int[] dfs() {
+    // perform bfs from source to sink in residual network, return parents for each discovered node
+    private int[] bfs() {
         int source = 0;
         int sink = this.capacities.length - 1;
-        Stack<Integer> stack = new Stack<>();
+        Queue<Integer> queue = new LinkedList<>();
         int[] parents = new int[this.capacities.length];
         Arrays.fill(parents, -1);
         parents[source] = 0;
-        stack.push(source);
-        while (!stack.isEmpty()) {
-            int top = stack.pop();
+        queue.add(source);
+        while (!queue.isEmpty()) {
+            int top = queue.poll();
             if (this.capacities[top][sink] - this.flow[top][sink] > 0) {
                 parents[sink] = top;
                 return parents;
             } else {
                 for (int i = 0; i < sink; ++i) {
                     if (this.capacities[top][i] - this.flow[top][i] > 0 && parents[i] == -1) {
-                        stack.push(i);
+                        queue.add(i);
                         parents[i] = top;
                     }
                 }
