@@ -1,6 +1,6 @@
 package structure;
 
-// this class implements the segment tree data structure for efficient range minimum queries
+// this class implements the segment tree data structure for efficient dynamic range minimum queries
 public class SegmentTree {
 
     // the original array
