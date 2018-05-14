@@ -1,6 +1,5 @@
 package algorithm;
 
-import data.Pair;
 import data.WeightedEdge;
 import structure.MinHeap;
 
@@ -11,15 +10,15 @@ import java.util.Vector;
 // this class implements Dijkstra's shortest path algorithm on simple, directed graphs
 public class Dijkstra {
 
-    private final Vector<List<WeightedEdge<Long>>> adjacencyLists;
+    private final Vector<List<WeightedEdge<Long>>> adjacencyList;
     private long[] distances;
     private int[] predecessors;
 
     // initialize with adjacency list of weighted edge. Distances must be nonnegative.
-    public Dijkstra(Vector<List<WeightedEdge<Long>>> adjacencyLists) {
-        this.adjacencyLists = adjacencyLists;
-        this.distances = new long[adjacencyLists.size()];
-        this.predecessors = new int[adjacencyLists.size()];
+    public Dijkstra(Vector<List<WeightedEdge<Long>>> adjacencyList) {
+        this.adjacencyList = adjacencyList;
+        this.distances = new long[adjacencyList.size()];
+        this.predecessors = new int[adjacencyList.size()];
     }
 
     // compute all shortest path from a given source
@@ -32,8 +31,8 @@ public class Dijkstra {
         this.distances[source] = 0;
         this.predecessors[source] = source;
         // initialize heap
-        MinHeap<Integer> heap = new MinHeap<>(adjacencyLists.size());
-        for (WeightedEdge<Long> e : adjacencyLists.get(source)) {
+        MinHeap<Integer> heap = new MinHeap<>(adjacencyList.size());
+        for (WeightedEdge<Long> e : adjacencyList.get(source)) {
             heap.insert(e.target, e.weight);
             this.predecessors[e.target] = source;
         }
@@ -42,7 +41,7 @@ public class Dijkstra {
             long distance = heap.minimumKey();
             int node = heap.poll();
             this.distances[node] = distance;
-            for (WeightedEdge<Long> e : adjacencyLists.get(node)) {
+            for (WeightedEdge<Long> e : adjacencyList.get(node)) {
                 // only process nodes that are not yet finished
                 if (this.distances[e.target] == -1) {
                     // discovering node for the first time
@@ -84,7 +83,7 @@ public class Dijkstra {
             while (this.predecessors[target] != target) {
                 int predecessor = this.predecessors[target];
                 int goal = target;
-                WeightedEdge<Long> e = this.adjacencyLists.get(predecessor).stream()
+                WeightedEdge<Long> e = this.adjacencyList.get(predecessor).stream()
                         .filter(f -> f.target == goal)
                         .findFirst()
                         .get();

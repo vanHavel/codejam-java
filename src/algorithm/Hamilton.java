@@ -23,7 +23,7 @@ public class Hamilton {
         return compute(dp, 0, subsetN - 1);
     }
 
-    // recurive solution with caching
+    // recursive solution with caching
     private int compute(int[][] dp, int start, int visits) {
         if (dp[start][visits] != -1) {
             return dp[start][visits];

@@ -12,6 +12,7 @@ public class MinimumSpanningTree {
     private final PriorityQueue<WeightedEdge<Integer>> edges;
     private final int size;
 
+    // result fields
     private Set<WeightedEdge<Integer>> mstEdges;
     private int cost;
 
@@ -24,7 +25,7 @@ public class MinimumSpanningTree {
         for (int i = 0; i < n; ++i) {
             for (int j = i+1; j < n; ++j) {
                 if (weights[i][j] != -1) {
-                    this.edges.add(new WeightedEdge<Integer>(i,j,weights[i][j]));
+                    this.edges.add(new WeightedEdge<>(i,j,weights[i][j]));
                 }
             }
         }
