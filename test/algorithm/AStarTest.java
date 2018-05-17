@@ -27,9 +27,9 @@ class AStarTest {
         ToIntFunction<Integer> heuristic = (i -> 0);
         Predicate<Integer> goalTest = (i -> i == 120);
         AStar aStar = new AStar(initialState, successors, goalTest, heuristic);
-        Tuple<Integer, Integer> res = aStar.search();
-        assertEquals(res.fst, Integer.valueOf(120));
-        assertEquals(res.snd, Integer.valueOf(5));
+        aStar.search();
+        assertEquals(Integer.valueOf(120), aStar.getFinalState());
+        assertEquals(5, aStar.getOptimalCost());
     }
 
     @Test
@@ -47,8 +47,8 @@ class AStarTest {
         ToIntFunction<Tuple<Integer, Integer>> heuristic = (t -> Math.abs(t.fst - 5) + Math.abs(t.snd - 4));
         Predicate<Tuple<Integer, Integer>> goalTest = (t -> t.fst == 5 && t.snd == 4);
         AStar aStar = new AStar(initialState, successors, goalTest, heuristic);
-        Tuple<Tuple<Integer, Integer>, Integer> res = aStar.search();
-        assertEquals(res.fst, new Tuple<>(5,4));
-        assertEquals(res.snd, Integer.valueOf(9));
+        aStar.search();
+        assertEquals(new Tuple<>(5,4), aStar.getFinalState());
+        assertEquals(9, aStar.getOptimalCost());
     }
 }
