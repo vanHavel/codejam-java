@@ -10,11 +10,16 @@ import java.util.function.ToIntFunction;
 // this class implements the A* pathfinding/search algorithm
 public class AStar<S> {
 
+    // fields used in the algorithm
     private Function<S, Collection<Tuple<S, Integer>>> successors;
     private Predicate<S> goalTest;
     private ToIntFunction<S> heuristic;
     private PriorityQueue<Node<S>> openList;
     private HashSet<S> closedList;
+
+    // result fields
+    private S finalState = null;
+    private Integer optimalCost = 0;
 
     // node class for AStar. Contains state, cost to reach it and heuristic value.
     private class Node<S> implements Comparable<Node<S>>{
@@ -71,12 +76,14 @@ public class AStar<S> {
 
     // perform AStar search and return final state and cost to reach it
     // returns null if no solution exists
-    public Tuple<S, Integer> search() {
+    public void search() {
         while (! this.openList.isEmpty()) {
             Node<S> head = this.openList.poll();
             // found goal
             if (this.goalTest.test(head.state)) {
-                return new Tuple<>(head.state, head.cost);
+                this.finalState = head.state;
+                this.optimalCost = head.cost;
+                return;
             }
             // found already visited state
             else if (this.closedList.contains(head.state)){
@@ -96,7 +103,19 @@ public class AStar<S> {
 
             }
         }
-        return null;
+        return;
 
     }
+
+    // get final state reached
+    public S getFinalState() {
+        return this.finalState;
+    }
+
+    // get optimal cost
+    public int getOptimalCost() {
+        return this.optimalCost;
+    }
+
+
 }
