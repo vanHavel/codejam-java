@@ -5,14 +5,13 @@ import data.WeightedEdge;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class GraphUtility {
 
     // transform adjacency matrix to adjacency list
-    public static Vector<List<Edge>> adjacencyMatrixToAdjacencyList(boolean[][] edges) {
+    public static List<List<Edge>> adjacencyMatrixToAdjacencyList(boolean[][] edges) {
         int n = edges.length;
-        Vector<List<Edge>> vec = new Vector(n);
+        List<List<Edge>> vec = new ArrayList<>(n);
 
         for (int i = 0; i < n; ++i) {
             List<Edge> list = new ArrayList<>(n);
@@ -27,11 +26,11 @@ public class GraphUtility {
     }
 
     // transform connection matrix of bipartite graph into adjacency list
-    public static Vector<List<Edge>> bipartiteAdjacencyMatrixToAdjacencyList(boolean[][] edges) {
+    public static List<List<Edge>> bipartiteAdjacencyMatrixToAdjacencyList(boolean[][] edges) {
         int n = edges.length;
         int m = (n == 0 ? 0 : edges[0].length);
         int size = n + m;
-        Vector<List<Edge>> vec = new Vector(size);
+        List<List<Edge>> vec = new ArrayList<>(size);
         for (int i = 0; i < n; ++i) {
             vec.add(new ArrayList<>(m));
         }
@@ -52,15 +51,15 @@ public class GraphUtility {
     }
 
     // transforms long matrix of positive weights into adjacency list containing nonzero weights
-    public static Vector<List<WeightedEdge<Long>>> longWeightMatrixToAdjacencyList(long[][] weights) {
+    public static List<List<WeightedEdge<Long>>> longWeightMatrixToAdjacencyList(long[][] weights) {
         int n = weights.length;
-        Vector<List<WeightedEdge<Long>>> vec = new Vector(n);
+        List<List<WeightedEdge<Long>>> vec = new ArrayList<>(n);
 
         for (int i = 0; i < n; ++i) {
             List<WeightedEdge<Long>> list = new ArrayList<>(n);
             for (int j = 0; j < n; ++j) {
                 if (weights[i][j] != 0) {
-                    list.add(new WeightedEdge(i,j,weights[i][j]));
+                    list.add(new WeightedEdge<>(i,j,weights[i][j]));
                 }
             }
             vec.add(list);

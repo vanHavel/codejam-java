@@ -9,7 +9,7 @@ import java.util.*;
 public class BridgeDetector {
 
     // the graph's adjacency list
-    private Vector<? extends Collection<Edge>> adjacencyList;
+    private List<? extends Collection<Edge>> adjacencyList;
 
     // fields used in computation
     private int[] parents;
@@ -22,7 +22,7 @@ public class BridgeDetector {
     private Set<Edge> bridges = new HashSet<>();
 
     // construct with adjacency list
-    public BridgeDetector(Vector<? extends Collection<Edge>> adjacencyList) {
+    public BridgeDetector(List<? extends Collection<Edge>> adjacencyList) {
         this.adjacencyList = adjacencyList;
     }
 

@@ -18,7 +18,7 @@ class GraphUtilityTest {
         edges[1] = new boolean[] {false, false, false, false};
         edges[2] = new boolean[] {false, true, false, false};
         edges[3] = new boolean[] {false, true, true, false};
-        Vector<List<Edge>> adjList = GraphUtility.adjacencyMatrixToAdjacencyList(edges);
+        List<List<Edge>> adjList = GraphUtility.adjacencyMatrixToAdjacencyList(edges);
 
         assertEquals(4, adjList.size());
         assertEquals(3, adjList.get(0).size());
@@ -33,7 +33,7 @@ class GraphUtilityTest {
         edges[0][0] = true;
         edges[0][1] = true;
         edges[1][0] = true;
-        Vector<List<Edge>> adjList = GraphUtility.bipartiteAdjacencyMatrixToAdjacencyList(edges);
+        List<List<Edge>> adjList = GraphUtility.bipartiteAdjacencyMatrixToAdjacencyList(edges);
 
         assertEquals(4, adjList.size());
         assertEquals(2, adjList.get(0).size());
@@ -49,7 +49,7 @@ class GraphUtilityTest {
         edges[1] = new long[] {0, 0, 0, 0};
         edges[2] = new long[] {0, 5, 0, 0};
         edges[3] = new long[] {0, 10, 11, 0};
-        Vector<List<WeightedEdge<Long>>> adjList = GraphUtility.longWeightMatrixToAdjacencyList(edges);
+        List<List<WeightedEdge<Long>>> adjList = GraphUtility.longWeightMatrixToAdjacencyList(edges);
 
         assertEquals(4, adjList.size());
         assertEquals(3, adjList.get(0).size());

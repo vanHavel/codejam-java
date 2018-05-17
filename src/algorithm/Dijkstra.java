@@ -4,20 +4,17 @@ import data.WeightedEdge;
 import structure.MinHeap;
 import utility.GraphUtility;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 // this class implements Dijkstra's shortest path algorithm on simple, directed graphs
 public class Dijkstra {
 
-    private final Vector<? extends Collection<WeightedEdge<Long>>> adjacencyList;
+    private final List<? extends Collection<WeightedEdge<Long>>> adjacencyList;
     private long[] distances;
     private int[] predecessors;
 
     // initialize with adjacency list of weighted edge. Distances must be non-negative
-    public Dijkstra(Vector<? extends Collection<WeightedEdge<Long>>> adjacencyList) {
+    public Dijkstra(List<? extends Collection<WeightedEdge<Long>>> adjacencyList) {
         this.adjacencyList = adjacencyList;
         this.distances = new long[adjacencyList.size()];
         this.predecessors = new int[adjacencyList.size()];

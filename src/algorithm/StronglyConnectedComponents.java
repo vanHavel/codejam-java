@@ -9,7 +9,7 @@ import java.util.*;
 public class StronglyConnectedComponents {
 
     // the graph's adjacency list
-    private Vector<? extends Collection<Edge>> adjacencyList;
+    private List<? extends Collection<Edge>> adjacencyList;
 
     // fields used in the computation
     private int[] visitCounter;
@@ -23,7 +23,7 @@ public class StronglyConnectedComponents {
     private LinkedList<Set<Integer>> stronglyConnectedComponents = new LinkedList<>();
 
     // construct with adjacency list
-    public StronglyConnectedComponents(Vector<? extends Collection<Edge>> adjacencyList) {
+    public StronglyConnectedComponents(List<? extends Collection<Edge>> adjacencyList) {
         this.adjacencyList = adjacencyList;
     }
 

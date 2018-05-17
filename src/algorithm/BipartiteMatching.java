@@ -10,7 +10,7 @@ import java.util.*;
 public class BipartiteMatching {
 
     // graph information: edges and partition sizes
-    private Vector<? extends Collection<Edge>> adjacencyList;
+    private List<? extends Collection<Edge>> adjacencyList;
     private int n;
     private int m;
 
@@ -31,7 +31,7 @@ public class BipartiteMatching {
     }
     // construct with adjacency list and partition sizes
     // the first n indices into the list must be the first partition
-    public BipartiteMatching(Vector<? extends Collection<Edge>> adjacencyList, int n, int m) {
+    public BipartiteMatching(List<? extends Collection<Edge>> adjacencyList, int n, int m) {
         this.adjacencyList = adjacencyList;
         this.n = n;
         this.m = m;

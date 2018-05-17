@@ -4,14 +4,14 @@ import data.WeightedEdge;
 import utility.GraphUtility;
 
 import java.util.Collection;
-import java.util.Vector;
+import java.util.List;
 
 // this class implements the bellmann ford algorithm for computing shortest paths
 // with possibly negative edge weights. Negative cycles can be detected.
 public class BellmanFord {
 
     // the graph's adjacency list
-    private Vector<? extends Collection<WeightedEdge<Long>>> adjacencyList;
+    private List<? extends Collection<WeightedEdge<Long>>> adjacencyList;
 
     // result fields
     private long[] distances;
@@ -19,7 +19,7 @@ public class BellmanFord {
     private boolean negativeCycle = false;
 
     // initialize with adjacency list
-    public BellmanFord(Vector<? extends Collection<WeightedEdge<Long>>> adjacencyList) {
+    public BellmanFord(List<? extends Collection<WeightedEdge<Long>>> adjacencyList) {
         this.adjacencyList = adjacencyList;
     }
 
