@@ -3,16 +3,13 @@ package algorithm;
 import data.Edge;
 import utility.GraphUtility;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.Vector;
+import java.util.*;
 
 // this class finds bridges and articulation points in undirected graphs
 public class BridgeDetector {
 
     // the graph's adjacency list
-    private Vector<List<Edge>> adjacencyList;
+    private Vector<? extends Collection<Edge>> adjacencyList;
 
     // fields used in computation
     private int[] parents;
@@ -25,7 +22,7 @@ public class BridgeDetector {
     private Set<Edge> bridges = new HashSet<>();
 
     // construct with adjacency list
-    public BridgeDetector(Vector<List<Edge>> adjacencyList) {
+    public BridgeDetector(Vector<? extends Collection<Edge>> adjacencyList) {
         this.adjacencyList = adjacencyList;
     }
 

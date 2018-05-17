@@ -3,7 +3,7 @@ package algorithm;
 import data.WeightedEdge;
 import utility.GraphUtility;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Vector;
 
 // this class implements the bellmann ford algorithm for computing shortest paths
@@ -11,7 +11,7 @@ import java.util.Vector;
 public class BellmanFord {
 
     // the graph's adjacency list
-    private Vector<List<WeightedEdge<Long>>> adjacencyList;
+    private Vector<? extends Collection<WeightedEdge<Long>>> adjacencyList;
 
     // result fields
     private long[] distances;
@@ -19,7 +19,7 @@ public class BellmanFord {
     private boolean negativeCycle = false;
 
     // initialize with adjacency list
-    public BellmanFord(Vector<List<WeightedEdge<Long>>> adjacencyList) {
+    public BellmanFord(Vector<? extends Collection<WeightedEdge<Long>>> adjacencyList) {
         this.adjacencyList = adjacencyList;
     }
 

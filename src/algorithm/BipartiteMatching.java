@@ -4,16 +4,13 @@ import data.Edge;
 import data.Tuple;
 import utility.GraphUtility;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.Vector;
+import java.util.*;
 
 // this class computes maximum bipartite matchings
 public class BipartiteMatching {
 
     // graph information: edges and partition sizes
-    private Vector<List<Edge>> adjacencyList;
+    private Vector<? extends Collection<Edge>> adjacencyList;
     private int n;
     private int m;
 
@@ -34,7 +31,7 @@ public class BipartiteMatching {
     }
     // construct with adjacency list and partition sizes
     // the first n indices into the list must be the first partition
-    public BipartiteMatching(Vector<List<Edge>> adjacencyList, int n, int m) {
+    public BipartiteMatching(Vector<? extends Collection<Edge>> adjacencyList, int n, int m) {
         this.adjacencyList = adjacencyList;
         this.n = n;
         this.m = m;
