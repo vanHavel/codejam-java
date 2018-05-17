@@ -17,7 +17,9 @@ class BellmanFordTest {
         BellmanFord bellmanFord = new BellmanFord(weights);
         bellmanFord.computeShortestPaths(0);
         long[] distances = bellmanFord.getDistances();
+        int[] predecessors = bellmanFord.getPredecessors();
         assertArrayEquals(new long[] {0, 1, 2, 1}, distances);
+        assertArrayEquals(new int[] {0, 0, 1, 2}, predecessors);
         assertFalse(bellmanFord.hasNegativeCycle());
     }
 
