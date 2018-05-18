@@ -1,7 +1,5 @@
 package algorithm;
 
-import data.Tuple;
-
 import java.util.*;
 
 // this class computes mac flow using ford fulkerson method
@@ -48,7 +46,7 @@ public class FordFulkerson {
 
     // perform bfs from source to sink in residual network, return parents for each discovered node
     private int[] bfs() {
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Integer> queue = new ArrayDeque<>(this.capacities.length);
         int[] parents = new int[this.capacities.length];
         Arrays.fill(parents, -1);
         parents[this.source] = 0;
@@ -70,6 +68,7 @@ public class FordFulkerson {
         return parents;
     }
 
+    // increase the flow along augmenting path
     private void increasePath(int[] parents, int increase) {
         int current = this.sink;
         while (parents[current] != current) {
@@ -80,6 +79,7 @@ public class FordFulkerson {
         }
     }
 
+    // get maximum possible increase along augmenting path
     private int getIncrease(int[] parents) {
         int increase = Integer.MAX_VALUE;
         int current = this.sink;
