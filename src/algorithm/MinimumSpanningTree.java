@@ -6,7 +6,8 @@ import structure.UnionFind;
 
 import java.util.*;
 
-// thi class handles computing minimum spanning trees in undirected graphs
+// this class handles computing minimum spanning trees in undirected graphs
+// actually if the graph is not connected a minimum spanning forest is computed
 public class MinimumSpanningTree {
 
     private final PriorityQueue<WeightedEdge<Integer>> edges;
@@ -44,7 +45,7 @@ public class MinimumSpanningTree {
         this.mstEdges = new HashSet<>();
         UnionFind uf = new UnionFind(this.size);
 
-        while (this.mstEdges.size() < this.size - 1) {
+        while (!edges.isEmpty() && this.mstEdges.size() < this.size - 1) {
             WeightedEdge<Integer> top = edges.poll();
             if (uf.find(top.origin) != uf.find(top.target)) {
                 uf.union(top.origin, top.target);
@@ -57,6 +58,19 @@ public class MinimumSpanningTree {
     // get edges of mst
     public Set<WeightedEdge<Integer>> getEdges() {
        return this.mstEdges;
+    }
+
+    // get mst as graph
+    public List<List<WeightedEdge<Integer>>> getMST() {
+        List<List<WeightedEdge<Integer>>> adjacencyList = new ArrayList<>(this.size);
+        for (int i = 0; i < this.size; ++i) {
+            adjacencyList.add(new ArrayList<>());
+        }
+        for (WeightedEdge<Integer> edge : this.mstEdges) {
+            adjacencyList.get(edge.origin).add(edge);
+            adjacencyList.get(edge.target).add(new WeightedEdge<>(edge.target, edge.origin, edge.weight));
+        }
+        return adjacencyList;
     }
 
     // get cost of mst

@@ -43,7 +43,7 @@ class StronglyConnectedComponentsTest {
         assertTrue(indices[0] == indices[1]);
 
         // test dag
-        Vector<List<Edge>> dag = stronglyConnectedComponents.getComponentDAG();
+        List<List<Edge>> dag = stronglyConnectedComponents.getComponentDAG();
         assertEquals(2, dag.size());
         assertTrue(dag.contains(new ArrayList<>()));
     }

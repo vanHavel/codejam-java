@@ -96,7 +96,7 @@ public class StronglyConnectedComponents {
     }
 
     // obtain DAG of strongly connected components
-    public Vector<List<Edge>> getComponentDAG() {
+    public List<List<Edge>> getComponentDAG() {
         // collect all edges between components in O(E)
         Set<Edge> edges = new HashSet<>();
         for (int i = 0; i < this.adjacencyList.size(); ++i) {
@@ -109,7 +109,7 @@ public class StronglyConnectedComponents {
 
         // create adjacency list
         int c = this.stronglyConnectedComponents.size();
-        Vector<List<Edge>> vec = new Vector<>(c);
+        List<List<Edge>> vec = new ArrayList<>(c);
         for (int i = 0; i < c; ++i) {
             vec.add(new ArrayList<>());
         }
