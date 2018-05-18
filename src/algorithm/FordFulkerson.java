@@ -8,8 +8,12 @@ import java.util.*;
 // the implementation uses edmond karp and runs in O(V^3E) because of the adjacency matrix
 public class FordFulkerson {
 
+    // capacity array
     private int[][] capacities;
+
+    // result fields
     private int[][] flow;
+    private int maxFlow;
 
     // initialize Ford Fulkerson with array of capacities
     // the first index (0) is the source of the network, and the last index is the sink
@@ -20,7 +24,7 @@ public class FordFulkerson {
     }
 
     // calculate maxFlow value and capacities
-    public Tuple<Integer, int[][]> maxFlow() {
+    public void computeMaxFlow() {
         int[] parents = bfs();
         int sink = this.capacities.length - 1;
         while (parents[sink] != -1) {
@@ -28,11 +32,10 @@ public class FordFulkerson {
             this.increasePath(parents, increase);
             parents = bfs();
         }
-        int maxFlow = 0;
+        this.maxFlow = 0;
         for (int i = 0; i < capacities.length; ++i) {
-            maxFlow += flow[0][i];
+            this.maxFlow += this.flow[0][i];
         }
-        return new Tuple<>(maxFlow, flow);
     }
 
     // perform bfs from source to sink in residual network, return parents for each discovered node
@@ -82,5 +85,16 @@ public class FordFulkerson {
             current = previous;
         }
         return increase;
+    }
+
+
+    // get max flow array
+    public int[][] getMaxFlow() {
+        return this.flow;
+    }
+
+    // get max flow value
+    public int getMaxFlowValue() {
+        return this.maxFlow;
     }
 }

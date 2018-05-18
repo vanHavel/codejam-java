@@ -17,8 +17,8 @@ class FordFulkersonTest {
         capacities[4] = new int[] {0, 0, 0, 0, 0};
 
         FordFulkerson fordFulkerson = new FordFulkerson(capacities);
-        Tuple<Integer, int[][]> maxFlow = fordFulkerson.maxFlow();
-        assertEquals(Integer.valueOf(4), maxFlow.fst);
-        assertEquals(1, maxFlow.snd[0][1]);
+        fordFulkerson.computeMaxFlow();
+        assertEquals(4, fordFulkerson.getMaxFlowValue());
+        assertEquals(1, fordFulkerson.getMaxFlow()[0][1]);
     }
 }

@@ -23,6 +23,8 @@ public class MyOutputWriter {
         this.writer.println(s);
     }
 
+    public void print(String s) { this.writer.print(s); }
+
     public void printSolution(int testNumber, String s) {
         this.writer.println("Case #" + testNumber + ": " + s);
     }
